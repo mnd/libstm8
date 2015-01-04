@@ -27,3 +27,14 @@
 *.i*86
 *.x86_64
 *.hex
+
+# SDCC produced files
+*.asm
+*.cdb
+*.ihx
+*.lk
+*.lst
+*.map
+*.rel
+*.rst
+*.sym
