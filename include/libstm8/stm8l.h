@@ -20,7 +20,7 @@
 #ifndef STM8L_H
 #define STM8L_H
 
-#include "stm8lregs.h"
-#include "stm8lints.h"
+#include <libstm8/stm8lregs.h>
+#include <libstm8/stm8lints.h>
 
 #endif

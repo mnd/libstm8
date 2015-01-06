@@ -19,7 +19,7 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-#include "common.h"
+#include <libstm8/common.h>
 
 #define GPIOA 0x005000
 #define GPIOB 0x005005

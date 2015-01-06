@@ -35,7 +35,7 @@
 */
 
 /* I/O port hardware register map */
-#include "gpio.h"
+#include <libstm8/gpio.h>
 
 /* General hardware register map */
 
