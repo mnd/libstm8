@@ -11,7 +11,7 @@
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
@@ -19,10 +19,6 @@
 
 #ifndef STM8LREGS_DEFINE_H
 #define STM8LREGS_DEFINE_H
-
-
-#define MMIO8(addr) (*(volatile unsigned char *)(addr))
-#define MMIO16(addr) (*(volatile unsigned short int *)(addr))
 
 /* Factory conversion registers */
 
@@ -38,44 +34,8 @@
    The 2 MSB have a fixed value: 0x3.
 */
 
-
 /* I/O port hardware register map */
-
-#define PA_ODR MMIO8(0x005000)	/* Port A data output latch register */
-#define PA_IDR MMIO8(0x005001)	/* Port A input pin value register */
-#define PA_DDR MMIO8(0x005002)	/* Port A data direction register */
-#define PA_CR1 MMIO8(0x005003)	/* Port A control register 1 */
-#define PA_CR2 MMIO8(0x005004)	/* Port A control register 2 */
-
-#define PB_ODR MMIO8(0x005005)
-#define PB_IDR MMIO8(0x005006)
-#define PB_DDR MMIO8(0x005007)
-#define PB_CR1 MMIO8(0x005008)
-#define PB_CR2 MMIO8(0x005009)
-
-#define PC_ODR MMIO8(0x00500A)
-#define PC_IDR MMIO8(0x00500B)
-#define PC_DDR MMIO8(0x00500C)
-#define PC_CR1 MMIO8(0x00500D)
-#define PC_CR2 MMIO8(0x00500E)
-
-#define PD_ODR MMIO8(0x00500F)
-#define PD_IDR MMIO8(0x005010)
-#define PD_DDR MMIO8(0x005011)
-#define PD_CR1 MMIO8(0x005012)
-#define PD_CR2 MMIO8(0x005013)
-
-#define PE_ODR MMIO8(0x005014)
-#define PE_IDR MMIO8(0x005015)
-#define PE_DDR MMIO8(0x005016)
-#define PE_CR1 MMIO8(0x005017)
-#define PE_CR2 MMIO8(0x005018)
-
-#define PF_ODR MMIO8(0x005019)
-#define PF_IDR MMIO8(0x00501A)
-#define PF_DDR MMIO8(0x00501B)
-#define PF_CR1 MMIO8(0x00501C)
-#define PF_CR2 MMIO8(0x00501D)
+#include "gpio.h"
 
 /* General hardware register map */
 

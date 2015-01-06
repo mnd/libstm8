@@ -17,10 +17,11 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STM8L_H
-#define STM8L_H
+#ifndef COMMON_H
+#define COMMON_H
 
-#include "stm8lregs.h"
-#include "stm8lints.h"
+#define MMIO8(addr) (*(volatile unsigned char *)(addr))
+#define MMIO16(addr) (*(volatile unsigned short int *)(addr))
+
 
 #endif
