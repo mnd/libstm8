@@ -38,3 +38,6 @@
 *.rel
 *.rst
 *.sym
+
+# Other
+*~

@@ -20,8 +20,10 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#define MMIO8(addr) (*(volatile unsigned char *)(addr))
-#define MMIO16(addr) (*(volatile unsigned short int *)(addr))
+#include <stdint.h>
+
+#define MMIO8(addr) (*(volatile uint8_t *)(addr))
+#define MMIO16(addr) (*(volatile uint16_t *)(addr))
 
 
 #endif

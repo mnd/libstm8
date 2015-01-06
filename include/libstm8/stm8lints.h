@@ -46,7 +46,7 @@
 #define INT_TIM3_CAPTURE 22 /* TIM3 capture/compare interrupt */
 #define INT_TIM1_CHANGE  23 /* TIM1 update overflow/trigger/ COM */
 #define INT_TIM1_CAPTURE 24 /* TIM1 capture/compare interrupt */
-#define INT_TIM1_CHANGE  25 /* TIM4 update/overflow/trigger interrupt */
+#define INT_TIM4_CHANGE  25 /* TIM4 update/overflow/trigger interrupt */
 #define INT_SPI1         26 /* SPI1 TX buffer empty/ RX buffer not empty/ error/wakeup interrupt */
 #define INT_USART1_TRANS 27 /* USART1 transmit data register empty/ transmission complete interrupt */
 #define INT_USART1_RECV  28 /* USART1 received data ready/overrun error/ idle line detected/parity error/global error interrupt */
