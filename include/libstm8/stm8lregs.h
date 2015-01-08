@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STM8LREGS_DEFINE_H
-#define STM8LREGS_DEFINE_H
+#ifndef STM8LREGS_H
+#define STM8LREGS_H
 
 /* Factory conversion registers */
 
@@ -36,6 +36,9 @@
 
 /* I/O port hardware register map */
 #include <libstm8/gpio.h>
+
+/* CLK register map */
+#include <libstm8/clk.h>
 
 /* General hardware register map */
 
@@ -99,23 +102,6 @@
 
 #define PWR_CSR1 MMIO8(0x0050B2)	/* Power control and status register 1 */
 #define PWR_CSR2 MMIO8(0x0050B3)	/* Power control and status register 2 */
-
-#define CLK_DIVR      MMIO8(0x0050C0)	/* Clock master divider register */
-#define CLK_CRTCR     MMIO8(0x0050C1)	/* Clock RTC register */
-#define CLK_ICKR      MMIO8(0x0050C2)	/* Internal clock control register */
-#define CLK_PCKENR1   MMIO8(0x0050C3)	/* Peripheral clock gating register 1 */
-#define CLK_PCKENR2   MMIO8(0x0050C4)	/* Peripheral clock gating register 2 */
-#define CLK_CCOR      MMIO8(0x0050C5)	/* Configurable clock control register */
-#define CLK_ECKR      MMIO8(0x0050C6)	/* External clock control register */
-#define CLK_SCSR      MMIO8(0x0050C7)	/* System clock status register */
-#define CLK_SWR       MMIO8(0x0050C8)	/* System clock switch register */
-#define CLK_SWCR      MMIO8(0x0050C9)	/* Clock switch control register */
-#define CLK_CSSR      MMIO8(0x0050CA)	/* Clock security system register */
-#define CLK_CBEEPR    MMIO8(0x0050CB)	/* Clock BEEP register */
-#define CLK_HSICALR   MMIO8(0x0050CC)	/* HSI calibration register */
-#define CLK_HSITRIMR  MMIO8(0x0050CD)	/* HSI clock calibration trimming register */
-#define CLK_HSIUNLCKR MMIO8(0x0050CE)	/* HSI unlock register */
-#define CLK_REGCSR    MMIO8(0x0050CF)	/* Main regulator control status register */
 
 #define WWDG_CR MMIO8(0x0050D3)	/* WWDG control register */
 #define WWDG_WR MMIO8(0x0050D4)	/* WWDR window register */

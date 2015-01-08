@@ -1,7 +1,7 @@
 CC=sdcc
 LD=sdld
 CFLAGS += -I../../include
-LDFLAGS += ../../lib/libstm8.lib
+LDFLAGS += -L../../lib/ -lstm8-extended
 OBJECTS=blink.ihx
 
 .PHONY: all clean flash
