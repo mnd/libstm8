@@ -40,6 +40,9 @@
 /* CLK register map */
 #include <libstm8/clk.h>
 
+/* USART register map */
+#include <libstm8/usart.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -165,18 +168,6 @@
 #define I2C1_CCRH   MMIO8(0x00521C)	/* I2C1 clock control register high */
 #define I2C1_TRISER MMIO8(0x00521D)	/* I2C1 TRISE register */
 #define I2C1_PECR   MMIO8(0x00521E)	/* I2C1 packet error checking register */
-
-#define USART1_SR   MMIO8(0x005230)	/* USART1 status register */
-#define USART1_DR   MMIO8(0x005231)	/* USART1 data register */
-#define USART1_BRR1 MMIO8(0x005232)	/* USART1 baud rate register 1 */
-#define USART1_BRR2 MMIO8(0x005233)	/* USART1 baud rate register 2 */
-#define USART1_CR1  MMIO8(0x005234)	/* USART1 control register 1 */
-#define USART1_CR2  MMIO8(0x005235)	/* USART1 control register 2 */
-#define USART1_CR3  MMIO8(0x005236)	/* USART1 control register 3 */
-#define USART1_CR4  MMIO8(0x005237)	/* USART1 control register 4 */
-#define USART1_CR5  MMIO8(0x005238)	/* USART1 control register 5 */
-#define USART1_GTR  MMIO8(0x005239)	/* USART1 guard time register */
-#define USART1_PSCR MMIO8(0x00523A)	/* USART1 prescaler register */
 
 #define TIM2_CR1   MMIO8(0x005250)	/* TIM2 control register 1 */
 #define TIM2_CR2   MMIO8(0x005251)	/* TIM2 control register 2 */
