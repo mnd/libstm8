@@ -19,7 +19,7 @@
 
 #include <libstm8/clk.h>
 
-void rcc_periph_clock_enable (enum clk_periph_clken clock)
+void clk_periph_clock_enable (enum clk_periph_clken clock)
 {
   MMIO8(CLK_BASE + (clock >> 3)) |= 1 << (clock & 0x7);
 }

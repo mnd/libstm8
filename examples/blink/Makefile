@@ -1,16 +1,16 @@
 CC=sdcc
 LD=sdld
 CFLAGS += -I../../include
-LDFLAGS += -L../../lib/ -lstm8-extended
+LDFLAGS += -L../../lib/ -lstm8.lib
 OBJECTS=blink.ihx
 
-.PHONY: all clean flash
+.PHONY: all clean flash distclean
 
 all: $(OBJECTS)
 
-clean:
+distclean:
 	rm -f *~ *.asm *.cdb *.lk *.lst *.map *.rel *.rst *.sym
-distclean: clean
+clean: distclean
 	rm -f $(OBJECTS)
 
 flash: $(OBJECT).ihx

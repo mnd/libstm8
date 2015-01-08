@@ -22,7 +22,6 @@
 
 #include <libstm8/common.h>
 
-/* TODO: Documentation from http://www.st.com/web/en/resource/technical/document/reference_manual/CD00218714.pdf */
 #define CLK_BASE      0x0050C0
 #define CLK_DIVR      MMIO8(CLK_BASE + 0x0) /* Clock master divider register */
 #define CLK_CRTCR     MMIO8(CLK_BASE + 0x1) /* Clock RTC register */
@@ -237,6 +236,6 @@ enum clk_periph_clken {
   CLK_AES = _REG_BIT(0x10, 0)
 };
 
-void rcc_periph_clock_enable (enum clk_periph_clken clock);
+void clk_periph_clock_enable (enum clk_periph_clken clock);
 
 #endif
