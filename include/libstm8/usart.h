@@ -114,26 +114,33 @@ with address mark detection. */
    modes */
 
 /* stopbits variable */
-#define USART_STOPBITS_MASK (USART_CR3_STOP_MASK << USART_CR3_STOP_SHIFT)
-#define USART_STOPBITS_1 (USART_CR3_STOP_1 << USART_CR3_STOP_SHIFT)
-#define USART_STOPBITS_2 (USART_CR3_STOP_2 << USART_CR3_STOP_SHIFT)
-#define USART_STOPBITS_1_5 (USART_CR3_STOP_1_5 << USART_CR3_STOP_SHIFT)
+enum usart_stopbits {
+  USART_STOPBITS_MASK = (USART_CR3_STOP_MASK << USART_CR3_STOP_SHIFT),
+  USART_STOPBITS_1 = (USART_CR3_STOP_1 << USART_CR3_STOP_SHIFT),
+  USART_STOPBITS_2 = (USART_CR3_STOP_2 << USART_CR3_STOP_SHIFT),
+  USART_STOPBITS_1_5 = (USART_CR3_STOP_1_5 << USART_CR3_STOP_SHIFT)
+};
 /* parity variable*/
-#define USART_PARITY_MASK (USART_CR1_PCEN | USART_CR1_PS)
-#define USART_PARITY_NONE 0x0
-#define USART_PARITY_EVEN USART_CR1_PCEN
-#define USART_PARITY_ODD (USART_CR1_PCEN | USART_CR1_PS)
+enum usart_parity {
+  USART_PARITY_MASK = (USART_CR1_PCEN | USART_CR1_PS),
+  USART_PARITY_NONE = 0x0,
+  USART_PARITY_EVEN = USART_CR1_PCEN,
+  USART_PARITY_ODD  = (USART_CR1_PCEN | USART_CR1_PS)
+};
 /* mode variable */
-#define USART_MODE_MASK (USART_CR2_TEN | USART_CR2_REN) /* TX or RT mode */
-#define USART_MODE_RX   USART_CR2_REN
-#define USART_MODE_TX   USART_CR2_TEN
+enum usart_mode {
+  USART_MODE_MASK  = (USART_CR2_TEN | USART_CR2_REN), /* TX or RT mode */
+  USART_MODE_RX    = USART_CR2_REN,
+  USART_MODE_TX    = USART_CR2_TEN,
+  USART_MODE_TX_RX = (USART_CR2_TEN | USART_CR2_REN)
+};
 
 /* function prototypes */
 void usart_set_baudrate (uint16_t usart, uint32_t baud);
 void usart_set_databits (uint16_t usart, uint8_t bits);
-void usart_set_stopbits (uint16_t usart, uint8_t stopbits);
-void usart_set_parity (uint16_t usart, uint8_t parity);
-void usart_enable_mode (uint16_t usart, uint8_t mode);
+void usart_set_stopbits (uint16_t usart, enum usart_stopbits stopbits);
+void usart_set_parity (uint16_t usart, enum usart_parity parity);
+void usart_enable_mode (uint16_t usart, enum usart_mode mode);
 void usart_wait_send_ready (uint16_t usart);
 void usart_send (uint16_t usart, uint8_t byte);
 void usart_send_blocking (uint16_t usart, uint8_t byte);

@@ -107,8 +107,13 @@
 #define GPIO6 (1 << 6)
 #define GPIO7 (1 << 7)
 
+enum gpio_mode {
+  GPIO_MODE_INPUT  = GPIO_DD_INPUT,
+  GPIO_MODE_OUTPUT = GPIO_DD_OUTPUT
+};
+
 /* Function prototypes */
-void gpio_mode_setup (uint16_t gpioport, uint8_t dd,
+void gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,
 		      uint8_t cr1, uint8_t cr2, uint8_t pins);
 
 #endif

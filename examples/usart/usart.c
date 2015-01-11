@@ -22,7 +22,7 @@
 void
 gpio_setup ()
 {
-  gpio_mode_setup (GPIOC, GPIO_DD_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO3);
+  gpio_mode_setup (GPIOC, GPIO_MODE_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO3);
 }
 
 void

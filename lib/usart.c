@@ -57,7 +57,7 @@ usart_set_databits (uint16_t usart, uint8_t bits)
 }
 
 void
-usart_set_stopbits (uint16_t usart, uint8_t stopbits)
+usart_set_stopbits (uint16_t usart, enum usart_stopbits stopbits)
 {
   uint8_t cr3 = USART_CR3(usart);
   cr3 = (cr3 & ~USART_STOPBITS_MASK) | stopbits;
@@ -65,7 +65,7 @@ usart_set_stopbits (uint16_t usart, uint8_t stopbits)
 }
 
 void
-usart_enable_mode (uint16_t usart, uint8_t mode)
+usart_enable_mode (uint16_t usart, enum usart_mode mode)
 {
   uint8_t cr2 = USART_CR2(usart);
   cr2 = (cr2 & ~USART_MODE_MASK) | mode;
@@ -73,7 +73,7 @@ usart_enable_mode (uint16_t usart, uint8_t mode)
 }
 
 void
-usart_set_parity (uint16_t usart, uint8_t parity)
+usart_set_parity (uint16_t usart, enum usart_parity parity)
 {
   uint8_t cr1 = USART_CR1(usart);
 

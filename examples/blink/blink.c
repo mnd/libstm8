@@ -27,8 +27,8 @@ gpio_setup ()
   /* GPIOC_DDR = GPIO_DD(7, GPIO_DD_OUTPUT); */
   /* GPIOC_CR1 = GPIO_C1(7, GPIO_C1_PP); */
 
-  gpio_mode_setup (GPIOE, GPIO_DD_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
-  gpio_mode_setup (GPIOE, GPIO_DD_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
+  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
+  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
 }
 
 int

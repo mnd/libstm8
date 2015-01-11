@@ -19,7 +19,7 @@
 
 #include <libstm8/gpio.h>
 
-void gpio_mode_setup (uint16_t gpioport, uint8_t dd_mode,
+void gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,
 		      uint8_t c1_mode, uint8_t c2_mode, uint8_t pins)
 {
   uint8_t cr1, cr2, ddr, i;
@@ -37,7 +37,7 @@ void gpio_mode_setup (uint16_t gpioport, uint8_t dd_mode,
       cr2 |= GPIO_C2(i, c2_mode);
 
       ddr &= ~GPIO_DD_MASK(i);
-      ddr |= GPIO_DD(i, dd_mode);
+      ddr |= GPIO_DD(i, mode);
     }
   
   GPIO_CR1(gpioport) = cr1;
