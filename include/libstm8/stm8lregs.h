@@ -43,6 +43,9 @@
 /* USART register map */
 #include <libstm8/usart.h>
 
+/* LCD register map */
+#include <libstm8/lcd.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -297,30 +300,6 @@
 #define DAC_DHR8    MMIO8(0x005390)	/* DAC 8-bit data holding register */
 #define DAC_DORH    MMIO8(0x0053AC)	/* DAC data output register high */
 #define DAC_DORL    MMIO8(0x0053AD)	/* DAC data output register low */
-
-#define LCD_CR1 MMIO8(0x005400)	/* LCD control register 1 */
-#define LCD_CR2 MMIO8(0x005401)	/* LCD control register 2 */
-#define LCD_CR3 MMIO8(0x005402)	/* LCD control register 3 */
-#define LCD_FRQ MMIO8(0x005403)	/* LCD frequency selection register */
-#define LCD_PM0 MMIO8(0x005404)	/* LCD Port mask register 0 */
-#define LCD_PM1 MMIO8(0x005405)	/* LCD Port mask register 1 */
-#define LCD_PM2 MMIO8(0x005406)	/* LCD Port mask register 2 */
-#define LCD_PM3 MMIO8(0x005407)	/* LCD Port mask register 3 */
-
-#define LCD_RAM0  MMIO8(0x00540C)	/* LCD display memory 0 */
-#define LCD_RAM1  MMIO8(0x00540D)	/* LCD display memory 1 */
-#define LCD_RAM2  MMIO8(0x00540E)	/* LCD display memory 2 */
-#define LCD_RAM3  MMIO8(0x00540F)	/* LCD display memory 3 */
-#define LCD_RAM4  MMIO8(0x005410)	/* LCD display memory 4 */
-#define LCD_RAM5  MMIO8(0x005411)	/* LCD display memory 5 */
-#define LCD_RAM6  MMIO8(0x005412)	/* LCD display memory 6 */
-#define LCD_RAM7  MMIO8(0x005413)	/* LCD display memory 7 */
-#define LCD_RAM8  MMIO8(0x005414)	/* LCD display memory 8 */
-#define LCD_RAM9  MMIO8(0x005415)	/* LCD display memory 9 */
-#define LCD_RAM10 MMIO8(0x005416)	/* LCD display memory 10 */
-#define LCD_RAM11 MMIO8(0x005417)	/* LCD display memory 11 */
-#define LCD_RAM12 MMIO8(0x005418)	/* LCD display memory 12 */
-#define LCD_RAM13 MMIO8(0x005419)	/* LCD display memory 13 */
 
 #define RI_ICR1   MMIO8(0x005431)	/* Timer input capture routing register 1 */
 #define RI_ICR2   MMIO8(0x005432)	/* Timer input capture routing register 2 */
