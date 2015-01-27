@@ -35,10 +35,10 @@ usart_set_baudrate (uint16_t usart, uint32_t baud)
       break;
     case CLK_SCS_LSE:
       clock = 32786;
+      break;
     case CLK_SCS_HSE:	      /* unknown. TODO: global variable to get value? */
     defalut:
       return;
-      break;
     }
   clock >>= (CLK_DIVR >> CLK_DIV_CKM_SHIFT) & CLK_DIV_CKM_MASK; /* sysclk speed */
 

@@ -62,9 +62,6 @@
 #define LCD_CR1_DUTY_1_3	0x2
 #define LCD_CR1_DUTY_1_4	0x3
 
-#define LCD_CR1_BIAS_SHIFT	0 /* Bias selection */
-#define LCD_CR1_BIAS_MASK	0x1
-#define LCD_CR1_BIAS_1_3	0x0
 #define LCD_CR1_BIAS_1_2	0x1
 
 /* CR2 register map */
@@ -162,32 +159,33 @@
 /* These bits determine the number of port pins to be used as segment drivers. */
 #define LCD_PM(n)	MMIO8(LCD_BASE + 0x04 + (n))
 #define LCD_PM_SEG(n)   (1 << ((n) % 0x8))
-#define LCD_PM_ENABLE_SEG(n)	LCD_PM((n) / 0x8) |= LCD_PM_SEG(n)
+#define LCD_PM_ENABLE_SEG(n)	(LCD_PM((n) / 0x8) |= LCD_PM_SEG(n))
+#define LCD_PM_DISABLE_SEG(n)	(LCD_PM((n) / 0x8) &= ~LCD_PM_SEG(n))
 
 /* LCD CR4 register map */
 #define LCD_CR4_PAGE_COM	(1 << 2)
 #define LCD_CR4_DUTY_8		(1 << 1)
-#define LCD_CR4_BIAS_4		(1 << 0)
+#define LCD_CR4_BIAS_1_4	(1 << 0)
 
 /* LCD RAM */
 
 #define LCD_RAM_BASE 0x00540C
-#define LCD_RAM_COM(n) MMIO8(LCD_RAM_BASE + (n))
+#define LCD_RAM(n) MMIO8(LCD_RAM_BASE + (n))
 
-#define LCD_RAM0  LCD_RAM_COM(0x0)	/* LCD display memory 0 */
-#define LCD_RAM1  LCD_RAM_COM(0x1)	/* LCD display memory 1 */
-#define LCD_RAM2  LCD_RAM_COM(0x2)	/* LCD display memory 2 */
-#define LCD_RAM3  LCD_RAM_COM(0x3)	/* LCD display memory 3 */
-#define LCD_RAM4  LCD_RAM_COM(0x4)	/* LCD display memory 4 */
-#define LCD_RAM5  LCD_RAM_COM(0x5)	/* LCD display memory 5 */
-#define LCD_RAM6  LCD_RAM_COM(0x6)	/* LCD display memory 6 */
-#define LCD_RAM7  LCD_RAM_COM(0x7)	/* LCD display memory 7 */
-#define LCD_RAM8  LCD_RAM_COM(0x8)	/* LCD display memory 8 */
-#define LCD_RAM9  LCD_RAM_COM(0x9)	/* LCD display memory 9 */
-#define LCD_RAM10 LCD_RAM_COM(0xA)	/* LCD display memory 10 */
-#define LCD_RAM11 LCD_RAM_COM(0xB)	/* LCD display memory 11 */
-#define LCD_RAM12 LCD_RAM_COM(0xC)	/* LCD display memory 12 */
-#define LCD_RAM13 LCD_RAM_COM(0xD)	/* LCD display memory 13 */
+#define LCD_RAM0  LCD_RAM(0x0)	/* LCD display memory 0 */
+#define LCD_RAM1  LCD_RAM(0x1)	/* LCD display memory 1 */
+#define LCD_RAM2  LCD_RAM(0x2)	/* LCD display memory 2 */
+#define LCD_RAM3  LCD_RAM(0x3)	/* LCD display memory 3 */
+#define LCD_RAM4  LCD_RAM(0x4)	/* LCD display memory 4 */
+#define LCD_RAM5  LCD_RAM(0x5)	/* LCD display memory 5 */
+#define LCD_RAM6  LCD_RAM(0x6)	/* LCD display memory 6 */
+#define LCD_RAM7  LCD_RAM(0x7)	/* LCD display memory 7 */
+#define LCD_RAM8  LCD_RAM(0x8)	/* LCD display memory 8 */
+#define LCD_RAM9  LCD_RAM(0x9)	/* LCD display memory 9 */
+#define LCD_RAM10 LCD_RAM(0xA)	/* LCD display memory 10 */
+#define LCD_RAM11 LCD_RAM(0xB)	/* LCD display memory 11 */
+#define LCD_RAM12 LCD_RAM(0xC)	/* LCD display memory 12 */
+#define LCD_RAM13 LCD_RAM(0xD)	/* LCD display memory 13 */
 
 /* COM0: RAM0[0:7] RAM1[0:7] RAM2[0:7] RAM3[0:3]
    COM1: RAM3[4:7] RAM4[0:7] RAM5[0:7] RAM6[0:7]
@@ -199,30 +197,48 @@
    COM2: RAM18[0:7] RAM19[0:7]
    COM3: RAM20[0:7] RAM21[0:7]
 
-   COM4-7 -- same addreses as COM0-3.
-   To enable COM4-7 we need set bit LCD_CR4_DUTY_8.
+   COM4-COM7 -- same addreses as COM0-COM3.
+   To enable COM4-COM7 we need set bit LCD_CR4_DUTY_8.
    To switch addresses from COM(n) to COM(n+4) we must set LCD_CR4_PAGE_COM bit.
 */
 
-/* void lcd_enable(void); */
-/* void lcd_update(void); */
+enum lcd_contrast {
+  LCD_CC_0 = LCD_CR2_CC_0,
+  LCD_CC_1 = LCD_CR2_CC_1,
+  LCD_CC_2 = LCD_CR2_CC_2,
+  LCD_CC_3 = LCD_CR2_CC_3,
+  LCD_CC_4 = LCD_CR2_CC_4,
+  LCD_CC_5 = LCD_CR2_CC_5,
+  LCD_CC_6 = LCD_CR2_CC_6,
+  LCD_CC_7 = LCD_CR2_CC_7
+};
 
-/* void lcd_wait_for_lcd_enabled(void); */
-/* void lcd_wait_for_step_up_ready(void); */
-/* void lcd_wait_for_update_ready(void); */
+enum lcd_bias {
+  LCD_BIAS_1_3 = 0x0,
+  LCD_BIAS_1_2 = 0x1,
+  LCD_BIAS_1_4 = 0x2
+};
 
-/* int lcd_is_enabled(void); */
-/* int lcd_is_step_up_ready(void); */
-/* int lcd_is_for_update_ready(void); */
+enum lcd_duty {
+  LCD_DUTY_STATIC = LCD_CR1_DUTY_STATIC,
+  LCD_DUTY_1_2 = LCD_CR1_DUTY_1_2,
+  LCD_DUTY_1_3 = LCD_CR1_DUTY_1_3,
+  LCD_DUTY_1_4 = LCD_CR1_DUTY_1_4,
+  LCD_DUTY_1_8  		/* LCD_DUTY_1_4 + 1 */
+};
 
-/* void lcd_set_contrast(uint8_t contrast); */
-/* void lcd_set_bias(uint8_t bias); */
-/* void lcd_set_duty(uint8_t duty); */
-/* void lcd_set_prescaler(uint8_t ps); */
-/* void lcd_set_divider(uint8_t div); */
-/* void lcd_enable_segment_multiplexing(void); */
-/* void lcd_disable_segment_multiplexing(void); */
-/* void lcd_set_refresh_frequency(uint32_t frequency); */
+void lcd_enable (void);
+void lcd_enable_segments (uint32_t segments);
+void lcd_disable_segments (uint32_t segments);
+
+void lcd_wait_for_update_ready (void);
+
+void lcd_set_contrast (enum lcd_contrast contrast);
+void lcd_set_bias (enum lcd_bias bias);
+void lcd_set_duty (enum lcd_duty duty);
+void lcd_set_prescaler (uint8_t ps);
+void lcd_set_divider (uint8_t div);
+void lcd_set_refresh_frequency (uint32_t frequency);
 
 
 #endif

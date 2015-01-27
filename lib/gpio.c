@@ -19,8 +19,9 @@
 
 #include <libstm8/gpio.h>
 
-void gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,
-		      uint8_t c1_mode, uint8_t c2_mode, uint8_t pins)
+void
+gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,
+		 uint8_t c1_mode, uint8_t c2_mode, uint8_t pins)
 {
   uint8_t cr1, cr2, ddr, i;
   cr1 = GPIO_CR1(gpioport);
