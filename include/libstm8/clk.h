@@ -61,7 +61,7 @@
    Any write with a non valid target code will be skipped.
    The content of these bits is frozen and write protected when RTCSWBSY is set. */
 #define CLK_CRTC_DIV_SHIFT 0x5
-#define CLK_CRTC_DIV_MASK  0x3
+#define CLK_CRTC_DIV_MASK  0x7
 #define CLK_CRTC_DIV_1   0x0	/* default */
 #define CLK_CRTC_DIV_2   0x1
 #define CLK_CRTC_DIV_4   0x2
@@ -125,7 +125,7 @@
 
 /* Configurable clock output register */
 #define CLK_CCO_DIV_SHIFT 0x5
-#define CLK_CCO_DIV_MASK  0x3
+#define CLK_CCO_DIV_MASK  0x7
 #define CLK_CCO_DIV_1   0x0
 #define CLK_CCO_DIV_2   0x1
 #define CLK_CCO_DIV_4   0x2
@@ -237,5 +237,8 @@ enum clk_periph_clken {
 };
 
 void clk_periph_clock_enable (enum clk_periph_clken clock);
+/* maximum allowed RTC rate is 1MHz, so we would set appropriate divide for HSI */
+void clk_rtc_select_clock (uint8_t clock);
+
 
 #endif
