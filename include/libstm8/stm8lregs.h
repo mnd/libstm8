@@ -46,6 +46,9 @@
 /* LCD register map */
 #include <libstm8/lcd.h>
 
+/* PWR register map */
+#include <libstm8/pwr.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -105,9 +108,6 @@
 
 #define RST_CR MMIO8(0x0050B0)	/* Reset control register */
 #define RST_SR MMIO8(0x0050B1)	/* Reset status register */
-
-#define PWR_CSR1 MMIO8(0x0050B2)	/* Power control and status register 1 */
-#define PWR_CSR2 MMIO8(0x0050B3)	/* Power control and status register 2 */
 
 #define WWDG_CR MMIO8(0x0050D3)	/* WWDG control register */
 #define WWDG_WR MMIO8(0x0050D4)	/* WWDR window register */
