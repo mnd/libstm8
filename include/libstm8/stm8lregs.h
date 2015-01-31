@@ -49,6 +49,9 @@
 /* PWR register map */
 #include <libstm8/pwr.h>
 
+/* RST register map */
+#include <libstm8/rst.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -105,9 +108,6 @@
 #define WFE_CR1 MMIO8(0x0050A6)	/* WFE control register 1 */
 #define WFE_CR2 MMIO8(0x0050A7)	/* WFE control register 2 */
 #define WFE_CR3 MMIO8(0x0050A8)	/* WFE control register 3 */
-
-#define RST_CR MMIO8(0x0050B0)	/* Reset control register */
-#define RST_SR MMIO8(0x0050B1)	/* Reset status register */
 
 #define WWDG_CR MMIO8(0x0050D3)	/* WWDG control register */
 #define WWDG_WR MMIO8(0x0050D4)	/* WWDR window register */
