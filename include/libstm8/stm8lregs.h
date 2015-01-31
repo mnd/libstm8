@@ -52,6 +52,9 @@
 /* RST register map */
 #include <libstm8/rst.h>
 
+/* Routing Interface register map */
+#include <libstm8/ri.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -300,22 +303,6 @@
 #define DAC_DHR8    MMIO8(0x005390)	/* DAC 8-bit data holding register */
 #define DAC_DORH    MMIO8(0x0053AC)	/* DAC data output register high */
 #define DAC_DORL    MMIO8(0x0053AD)	/* DAC data output register low */
-
-#define RI_ICR1   MMIO8(0x005431)	/* Timer input capture routing register 1 */
-#define RI_ICR2   MMIO8(0x005432)	/* Timer input capture routing register 2 */
-#define RI_IOIR1  MMIO8(0x005433)	/* I/O input register 1 */
-#define RI_IOIR2  MMIO8(0x005434)	/* I/O input register 2 */
-#define RI_IOIR3  MMIO8(0x005435)	/* I/O input register 3 */
-#define RI_IOCMR1 MMIO8(0x005436)	/* I/O control mode register 1 */
-#define RI_IOCMR2 MMIO8(0x005437)	/* I/O control mode register 2 */
-#define RI_IOCMR3 MMIO8(0x005438)	/* I/O control mode register 3 */
-#define RI_IOSR1  MMIO8(0x005439)	/* I/O switch register 1 */
-#define RI_IOSR2  MMIO8(0x00543A)	/* I/O switch register 2 */
-#define RI_IOSR3  MMIO8(0x00543B)	/* I/O switch register 3 */
-#define RI_IOGCR  MMIO8(0x00543C)	/* I/O group control register */
-#define RI_ASCR1  MMIO8(0x00543D)	/* Analog switch register 1 */
-#define RI_ASCR2  MMIO8(0x00543E)	/* Analog switch register 2 */
-#define RI_RCR    MMIO8(0x00543F)	/* Resistor control register 1 */
 
 #define COMP_CSR1 MMIO8(0x005440)	/* Comparator control and status register 1 */
 #define COMP_CSR2 MMIO8(0x005441)	/* Comparator control and status register 2 */
