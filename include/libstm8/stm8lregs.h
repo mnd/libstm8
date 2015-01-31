@@ -55,6 +55,9 @@
 /* Routing Interface register map */
 #include <libstm8/ri.h>
 
+/* SYSCFG register map */
+#include <libstm8/syscfg.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -97,9 +100,6 @@
 #define DMA1_C3PARL_C3M1ARL MMIO8(0x005097)
 #define DMA1_C3M0ARH MMIO8(0x005099)
 #define DMA1_C3M0ARL MMIO8(0x00509A)
-
-#define SYSCFG_RMPCR1 MMIO8(0x00509E)	/* Remapping register 1 */
-#define SYSCFG_RMPCR2 MMIO8(0x00509F)	/* Remapping register 2 */
 
 #define EXTI_CR1   MMIO8(0x0050A0)	/* External interrupt control register 1 */
 #define EXTI_CR2   MMIO8(0x0050A1)	/* External interrupt control register 2 */
