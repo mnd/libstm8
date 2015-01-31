@@ -31,14 +31,14 @@ gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,
     {
       if (! (pins & (1 << i))) continue;
 
-      cr1 &= ~GPIO_C1_MASK(i);
-      cr1 |= GPIO_C1(i, c1_mode);
+      cr1 &= ~GPIO_CR1_MASK(i);
+      cr1 |= GPIO_CR1_VAL(i, c1_mode);
 
-      cr2 &= ~GPIO_C2_MASK(i);
-      cr2 |= GPIO_C2(i, c2_mode);
+      cr2 &= ~GPIO_CR2_MASK(i);
+      cr2 |= GPIO_CR2_VAL(i, c2_mode);
 
-      ddr &= ~GPIO_DD_MASK(i);
-      ddr |= GPIO_DD(i, mode);
+      ddr &= ~GPIO_DDR_MASK(i);
+      ddr |= GPIO_DDR_VAL(i, mode);
     }
   
   GPIO_CR1(gpioport) = cr1;

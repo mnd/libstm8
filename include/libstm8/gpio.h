@@ -70,32 +70,32 @@
 #define GPIOF_CR2 GPIO_CR2(GPIOF)
 
 /* GPIOx_ODR values */
-#define GPIO_OD_MASK(n) (0x1 << (n))
+#define GPIO_ODR_MASK(n) (0x1 << (n))
 
 /* GPIOx_IDR values */
-#define GPIO_ID_MASK(n) (0x1 << (n))
+#define GPIO_IDR_MASK(n) (0x1 << (n))
 
 /* GPIOx_DDR values */
-#define GPIO_DD_INPUT  0x0
-#define GPIO_DD_OUTPUT 0x1
-#define GPIO_DD(n, mode) ((mode) << (n))
-#define GPIO_DD_MASK(n)  (0x1    << (n))
+#define GPIO_DDR_INPUT  0x0
+#define GPIO_DDR_OUTPUT 0x1
+#define GPIO_DDR_VAL(n, mode) ((mode) << (n))
+#define GPIO_DDR_MASK(n)      (0x1    << (n))
 
 /* GPIOx_CR1 values */
-#define GPIO_C1_OD 0x0 	/* In output mode pseudo open drain */
-#define GPIO_C1_PP 0x1 	/* In output mode push pull mode */
-#define GPIO_C1_FI 0x0	/* In input mode floating input */
-#define GPIO_C1_PU 0x1	/* In input mode input with pull-up */
-#define GPIO_C1(n, mode) ((mode) << (n))
-#define GPIO_C1_MASK(n)  (0x1    << (n))
+#define GPIO_CR1_OD 0x0 	/* In output mode pseudo open drain */
+#define GPIO_CR1_PP 0x1 	/* In output mode push pull mode */
+#define GPIO_CR1_FI 0x0	/* In input mode floating input */
+#define GPIO_CR1_PU 0x1	/* In input mode input with pull-up */
+#define GPIO_CR1_VAL(n, mode) ((mode) << (n))
+#define GPIO_CR1_MASK(n)      (0x1    << (n))
 
 /* GPIOx_CR2 values */
-#define GPIO_C2_ID 0x0		/* In input mode interrupts disabled */
-#define GPIO_C2_IE 0x1		/* In input mode interrupts enabled */
-#define GPIO_C2_2  0x0		/* In output mode speed up to 2 MHz */
-#define GPIO_C2_10 0x1		/* In output mode speed up to 10 MHz */
-#define GPIO_C2(n, mode) ((mode) << (n))
-#define GPIO_C2_MASK(n)  (0x1    << (n))
+#define GPIO_CR2_ID 0x0		/* In input mode interrupts disabled */
+#define GPIO_CR2_IE 0x1		/* In input mode interrupts enabled */
+#define GPIO_CR2_2  0x0		/* In output mode speed up to 2 MHz */
+#define GPIO_CR2_10 0x1		/* In output mode speed up to 10 MHz */
+#define GPIO_CR2_VAL(n, mode) ((mode) << (n))
+#define GPIO_CR2_MASK(n)      (0x1    << (n))
 
 /* GPIO ports */
 #define GPIO0 (1 << 0)
@@ -108,8 +108,8 @@
 #define GPIO7 (1 << 7)
 
 enum gpio_mode {
-  GPIO_MODE_INPUT  = GPIO_DD_INPUT,
-  GPIO_MODE_OUTPUT = GPIO_DD_OUTPUT
+  GPIO_MODE_INPUT  = GPIO_DDR_INPUT,
+  GPIO_MODE_OUTPUT = GPIO_DDR_OUTPUT
 };
 
 /* Function prototypes */

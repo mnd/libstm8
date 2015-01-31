@@ -24,15 +24,15 @@
 static void
 lcd_init (void)
 {
-  gpio_mode_setup (GPIOA, GPIO_MODE_OUTPUT, GPIO_C1_OD, GPIO_C2_2,
+  gpio_mode_setup (GPIOA, GPIO_MODE_OUTPUT, GPIO_CR1_OD, GPIO_CR2_2,
 		   GPIO4 | GPIO5 | GPIO6 | GPIO7);
-  gpio_mode_setup (GPIOB, GPIO_MODE_OUTPUT, GPIO_C1_OD, GPIO_C2_2,
+  gpio_mode_setup (GPIOB, GPIO_MODE_OUTPUT, GPIO_CR1_OD, GPIO_CR2_2,
 		   GPIO0 | GPIO1 | GPIO2 | GPIO3 | GPIO4 | GPIO5 | GPIO6 | GPIO7);
-  gpio_mode_setup (GPIOC, GPIO_MODE_OUTPUT, GPIO_C1_OD, GPIO_C2_2,
+  gpio_mode_setup (GPIOC, GPIO_MODE_OUTPUT, GPIO_CR1_OD, GPIO_CR2_2,
 		   GPIO2 | GPIO3);
-  gpio_mode_setup (GPIOD, GPIO_MODE_OUTPUT, GPIO_C1_OD, GPIO_C2_2,
+  gpio_mode_setup (GPIOD, GPIO_MODE_OUTPUT, GPIO_CR1_OD, GPIO_CR2_2,
 		   GPIO0 | GPIO1 | GPIO2 | GPIO3 | GPIO4 | GPIO5 | GPIO6 | GPIO7);
-  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_C1_OD, GPIO_C2_2,
+  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_CR1_OD, GPIO_CR2_2,
 		   GPIO0 | GPIO1 | GPIO2 | GPIO3 | GPIO4 | GPIO5);
   
   clk_periph_clock_enable (CLK_RTC);

@@ -22,13 +22,13 @@
 void
 gpio_setup ()
 {
-  /* GPIOE_DDR = GPIO_DD(7, GPIO_DD_OUTPUT); */
-  /* GPIOE_CR1 = GPIO_C1(7, GPIO_C1_PP); */
-  /* GPIOC_DDR = GPIO_DD(7, GPIO_DD_OUTPUT); */
-  /* GPIOC_CR1 = GPIO_C1(7, GPIO_C1_PP); */
+  /* GPIOE_DDR = GPIO_DD(7, GPIO_DDR_OUTPUT); */
+  /* GPIOE_CR1 = GPIO_C1(7, GPIO_CR1_PP); */
+  /* GPIOC_DDR = GPIO_DD(7, GPIO_DDR_OUTPUT); */
+  /* GPIOC_CR1 = GPIO_C1(7, GPIO_CR1_PP); */
 
-  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
-  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_C1_PP, GPIO_C2_2, GPIO7);
+  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_CR1_PP, GPIO_CR2_2, GPIO7);
+  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_CR1_PP, GPIO_CR2_2, GPIO7);
 }
 
 int
