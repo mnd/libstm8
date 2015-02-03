@@ -67,6 +67,9 @@
 /* DAC register map */
 #include <libstm8/dac.h>
 
+/* COMP register map */
+#include <libstm8/comp.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -246,12 +249,6 @@
 #define TIM4_ARR   MMIO8(0x0052E9)
 
 #define IR_CR MMIO8(0x0052FF)	/* Infrared control register */
-
-#define COMP_CSR1 MMIO8(0x005440)	/* Comparator control and status register 1 */
-#define COMP_CSR2 MMIO8(0x005441)	/* Comparator control and status register 2 */
-#define COMP_CSR3 MMIO8(0x005442)	/* Comparator control and status register 3 */
-#define COMP_CSR4 MMIO8(0x005443)	/* Comparator control and status register 4 */
-#define COMP_CSR5 MMIO8(0x005444)	/* Comparator control and status register 5 */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
