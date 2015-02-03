@@ -66,41 +66,6 @@
 #define FLASH_DUKR  MMIO8(0x005053)	/* Data EEPROM unprotection key register */
 #define FLASH_IAPSR MMIO8(0x005054)	/* Flash in-application programming status register */
 
-#define DMA1_GCSR MMIO8(0x005070)	/* DMA1 global configuration & status register */
-#define DMA1_GIR1 MMIO8(0x005071)	/* DMA1 global interrupt register 1 */
-
-#define DMA1_C0CR    MMIO8(0x005075)	/* DMA1 channel 0 configuration register */
-#define DMA1_C0SPR   MMIO8(0x005076)	/* DMA1 channel 0 status & priority register */
-#define DMA1_C0NDTR  MMIO8(0x005077)	/* DMA1 number of data to transfer register (channel 0) */
-#define DMA1_C0PARH  MMIO8(0x005078)	/* DMA1 peripheral address high register (channel 0) */
-#define DMA1_C0PARL  MMIO8(0x005079)	/* DMA1 peripheral address low register (channel 0) */
-#define DMA1_C0M0ARH MMIO8(0x00507B)	/* DMA1 memory 0 address high register (channel 0) */
-#define DMA1_C0M0ARL MMIO8(0x00507C)	/* DMA1 memory 0 address low register (channel 0) */
-
-#define DMA1_C1CR    MMIO8(0x00507F)
-#define DMA1_C1SPR   MMIO8(0x005080)
-#define DMA1_C1NDTR  MMIO8(0x005081)
-#define DMA1_C1PARH  MMIO8(0x005082)
-#define DMA1_C1PARL  MMIO8(0x005083)
-#define DMA1_C1M0ARH MMIO8(0x005085)
-#define DMA1_C1M0ARL MMIO8(0x005086)
-
-#define DMA1_C2CR    MMIO8(0x005089)
-#define DMA1_C2SPR   MMIO8(0x00508A)
-#define DMA1_C2NDTR  MMIO8(0x00508B)
-#define DMA1_C2PARH  MMIO8(0x00508C)
-#define DMA1_C2PARL  MMIO8(0x00508D)
-#define DMA1_C2M0ARH MMIO8(0x00508F)
-#define DMA1_C2M0ARL MMIO8(0x005090)
-
-#define DMA1_C3CR    MMIO8(0x005093)
-#define DMA1_C3SPR   MMIO8(0x005094)
-#define DMA1_C3NDTR  MMIO8(0x005095)
-#define DMA1_C3PARH_C3M1ARH MMIO8(0x005096)
-#define DMA1_C3PARL_C3M1ARL MMIO8(0x005097)
-#define DMA1_C3M0ARH MMIO8(0x005099)
-#define DMA1_C3M0ARL MMIO8(0x00509A)
-
 #define EXTI_CR1   MMIO8(0x0050A0)	/* External interrupt control register 1 */
 #define EXTI_CR2   MMIO8(0x0050A1)	/* External interrupt control register 2 */
 #define EXTI_CR3   MMIO8(0x0050A2)	/* External interrupt control register 3 */
