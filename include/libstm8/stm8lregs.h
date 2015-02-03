@@ -58,6 +58,12 @@
 /* SYSCFG register map */
 #include <libstm8/syscfg.h>
 
+/* DMA register map */
+#include <libstm8/dma.h>
+
+/* ADC register map */
+#include <libstm8/adc.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -237,25 +243,6 @@
 #define TIM4_ARR   MMIO8(0x0052E9)
 
 #define IR_CR MMIO8(0x0052FF)	/* Infrared control register */
-
-#define ADC1_CR1  MMIO8(0x005340)	/* ADC1 configuration register 1 */
-#define ADC1_CR2  MMIO8(0x005341)	/* ADC1 configuration register 2 */
-#define ADC1_CR3  MMIO8(0x005342)	/* ADC1 configuration register 3 */
-#define ADC1_SR   MMIO8(0x005343)	/* ADC1 status register */
-#define ADC1_DRH  MMIO8(0x005344)	/* ADC1 data register high */
-#define ADC1_DRL  MMIO8(0x005345)	/* ADC1 data register low */
-#define ADC1_HTRH MMIO8(0x005346)	/* ADC1 high threshold register high */
-#define ADC1_HTRL MMIO8(0x005347)	/* ADC1 high threshold register low */
-#define ADC1_LTRH MMIO8(0x005348)	/* ADC1 low threshold register high */
-#define ADC1_LTRL MMIO8(0x005349)	/* ADC1 low threshold register low */
-#define ADC1_SQR1 MMIO8(0x00534A)	/* ADC1 channel sequence 1 register */
-#define ADC1_SQR2 MMIO8(0x00534B)	/* ADC1 channel sequence 2 register */
-#define ADC1_SQR3 MMIO8(0x00534C)	/* ADC1 channel sequence 3 register */
-#define ADC1_SQR4 MMIO8(0x00534D)	/* ADC1 channel sequence 4 register */
-#define ADC1_TRIGR1 MMIO8(0x00534E)	/* ADC1 trigger disable 1 */
-#define ADC1_TRIGR2 MMIO8(0x00534F)	/* ADC1 trigger disable 2 */
-#define ADC1_TRIGR3 MMIO8(0x005350)	/* ADC1 trigger disable 3 */
-#define ADC1_TRIGR4 MMIO8(0x005351)	/* ADC1 trigger disable 4 */
 
 #define DAC_CR1     MMIO8(0x005380)	/* DAC control register 1 */
 #define DAC_CR2     MMIO8(0x005381)	/* DAC control register 2 */
