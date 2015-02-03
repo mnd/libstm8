@@ -64,6 +64,9 @@
 /* ADC register map */
 #include <libstm8/adc.h>
 
+/* DAC register map */
+#include <libstm8/dac.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -244,18 +247,6 @@
 
 #define IR_CR MMIO8(0x0052FF)	/* Infrared control register */
 
-#define DAC_CR1     MMIO8(0x005380)	/* DAC control register 1 */
-#define DAC_CR2     MMIO8(0x005381)	/* DAC control register 2 */
-#define DAC_SWTRIGR MMIO8(0x005384)	/* DAC software trigger register */
-#define DAC_SR      MMIO8(0x005385)	/* DAC status register */
-#define DAC_RDHRH   MMIO8(0x005388)	/* DAC right aligned data holding register high */
-#define DAC_RDHRL   MMIO8(0x005389)	/* DAC right aligned data holding register low */
-#define DAC_LDHRH   MMIO8(0x00538C)	/* DAC left aligned data holding register high */
-#define DAC_LDHRL   MMIO8(0x00538D)	/* DAC left aligned data holding register low */
-#define DAC_DHR8    MMIO8(0x005390)	/* DAC 8-bit data holding register */
-#define DAC_DORH    MMIO8(0x0053AC)	/* DAC data output register high */
-#define DAC_DORL    MMIO8(0x0053AD)	/* DAC data output register low */
-
 #define COMP_CSR1 MMIO8(0x005440)	/* Comparator control and status register 1 */
 #define COMP_CSR2 MMIO8(0x005441)	/* Comparator control and status register 2 */
 #define COMP_CSR3 MMIO8(0x005442)	/* Comparator control and status register 3 */
@@ -313,7 +304,6 @@ of addresses 00 480B, 00 480C and 0x8000 (reset vector) the CPU jumps to the
 bootloader or to the reset vector.  Refer to the UM0560 bootloader user manual
 for more details. */
 
-
 #define OPT_IWDG_HW_MASK   (1 << 0) /* is independent watchdog activated by hardware */
 #define OPT_IWDG_HALT_MASK (1 << 1) /* independent window watchdog off on Halt/Active-halt */
 #define OPT_WWDG_HW_MASK   (1 << 2) /* is window watchdog activated by hardware  */
@@ -325,8 +315,7 @@ for more details. */
 #define OPT_BOR_ON_MASK (1 << 0) /* is brownout reset on */
 #define OPT_BOR_TH_MASK (7 << 1) /* Brownout reset thresholds */
 
-#define UID_POINTER 0x4926	/* 96-bit unique device identifier which provides a reference number that is unique for any device and in any context.
+#define UID_POINTER 0x004926	/* 96-bit unique device identifier which provides a reference number that is unique for any device and in any context.
 				   The 96 bits of the identifier can never be altered by the user. */
-
 
 #endif
