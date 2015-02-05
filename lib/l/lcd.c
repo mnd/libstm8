@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libstm8/lcd.h>
-#include <libstm8/clk.h>
+#include <libstm8/l/lcd.h>
+#include <libstm8/l/clk.h>
 
 void
 lcd_enable (void)

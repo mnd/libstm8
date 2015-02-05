@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <libstm8/adc.h>
+#include <libstm8/l/adc.h>
 
 void
 adc_power_on ()

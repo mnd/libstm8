@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libstm8/usart.h>
-#include <libstm8/clk.h>
+#include <libstm8/l/usart.h>
+#include <libstm8/l/clk.h>
 
 void
 usart_set_baudrate (uint16_t usart, uint32_t baud)

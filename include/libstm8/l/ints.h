@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STM8LINTS_H
-#define STM8LINTS_H
+#ifndef INTS_H
+#define INTS_H
 
 /* Usage with sdcc: void function (void) __interrupt(INT_NAME) { code; } */
 #define INT_RESERVED      0

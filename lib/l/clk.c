@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libstm8/clk.h>
+#include <libstm8/l/clk.h>
 
 void
 clk_periph_clock_enable (enum clk_periph_clken clock)

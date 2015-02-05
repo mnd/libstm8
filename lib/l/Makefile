@@ -1,12 +1,12 @@
 CC=sdcc
 LD=sdld
-CFLAGS += -I../include
-OBJECTS=gpio.rel clk.rel usart.rel lcd.rel adc.rel
+CFLAGS += -I../../include
+OBJECTS = gpio.rel clk.rel usart.rel lcd.rel adc.rel
 
 .PHNOY: all clean
 
 all: $(OBJECTS)
-	sdcclib stm8.lib $(OBJECTS)
+	sdcclib ../stm8.lib $(OBJECTS)
 
 %.rel: %.c
 	$(CC) -mstm8 $(CFLAGS) -c $<

@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libstm8/gpio.h>
+#include <libstm8/l/gpio.h>
 
 void
 gpio_mode_setup (uint16_t gpioport, enum gpio_mode mode,

@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STM8LREGS_H
-#define STM8LREGS_H
+#ifndef REGS_H
+#define REGS_H
 
 /* Factory conversion registers */
 
@@ -35,40 +35,40 @@
 */
 
 /* I/O port hardware register map */
-#include <libstm8/gpio.h>
+#include <libstm8/l/gpio.h>
 
 /* CLK register map */
-#include <libstm8/clk.h>
+#include <libstm8/l/clk.h>
 
 /* USART register map */
-#include <libstm8/usart.h>
+#include <libstm8/l/usart.h>
 
 /* LCD register map */
-#include <libstm8/lcd.h>
+#include <libstm8/l/lcd.h>
 
 /* PWR register map */
-#include <libstm8/pwr.h>
+#include <libstm8/l/pwr.h>
 
 /* RST register map */
-#include <libstm8/rst.h>
+#include <libstm8/l/rst.h>
 
 /* Routing Interface register map */
-#include <libstm8/ri.h>
+#include <libstm8/l/ri.h>
 
 /* SYSCFG register map */
-#include <libstm8/syscfg.h>
+#include <libstm8/l/syscfg.h>
 
 /* DMA register map */
-#include <libstm8/dma.h>
+#include <libstm8/l/dma.h>
 
 /* ADC register map */
-#include <libstm8/adc.h>
+#include <libstm8/l/adc.h>
 
 /* DAC register map */
-#include <libstm8/dac.h>
+#include <libstm8/l/dac.h>
 
 /* COMP register map */
-#include <libstm8/comp.h>
+#include <libstm8/l/comp.h>
 
 /* General hardware register map */
 
