@@ -298,7 +298,7 @@ void adc_off (void);
 void adc_set_sample_time (uint8_t channel, enum adc_smtp time);
 void adc_set_sample_time_on_all_channels (enum adc_smtp time);
 void adc_select_channel (enum adc_channel channel);
-void adc_enable_trigger (enum adc_channel channel);
+void adc_disable_schmitt_trigger (enum adc_channel channel);
 void adc_set_resolution (enum adc_resolution resolution);
 void adc_start_conversion (void);
 void adc_set_continuous_conversion_mode (void);

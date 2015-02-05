@@ -48,9 +48,9 @@ adc_setup ()
 
   adc_set_single_conversion_mode ();
   /* We want to read V_REFINT, so we have to select it. */
-  adc_enable_trigger (ADC_CH_VREFINT);
+  adc_disable_schmitt_trigger (ADC_CH_VREFINT);
   adc_select_channel (ADC_CH_VREFINT);
-  adc_set_sample_time_on_all_channels (ADC_SMTP_192);
+  adc_set_sample_time_on_all_channels (ADC_SMTP_24); /* 12usec */
 
   adc_power_on ();
 

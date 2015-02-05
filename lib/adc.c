@@ -59,7 +59,7 @@ adc_select_channel (enum adc_channel channel)
 }
 
 void
-adc_enable_trigger (enum adc_channel channel)
+adc_disable_schmitt_trigger (enum adc_channel channel)
 {
   MMIO8(ADC1_TRIGR_BASE + (channel >> 3)) |= 1 << (channel & 0x7);
 }
@@ -74,13 +74,15 @@ adc_set_resolution (enum adc_resolution resolution)
 void
 adc_set_continuous_conversion_mode ()
 {
- ADC1_CR1 |= ADC1_CR1_CONT;
+  ADC1_SQR1 &= ~ADC1_SQR1_DMAOFF;
+  ADC1_CR1 |= ADC1_CR1_CONT;
 }
 
 void
 adc_set_single_conversion_mode ()
 {
- ADC1_CR1 &= ~ADC1_CR1_CONT;
+  ADC1_SQR1 |= ADC1_SQR1_DMAOFF;
+  ADC1_CR1 &= ~ADC1_CR1_CONT;
 }
 
 void
