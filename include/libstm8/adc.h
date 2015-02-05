@@ -31,10 +31,12 @@
 #define ADC1_HTRL MMIO8(0x005347)	/* ADC1 high threshold register low */
 #define ADC1_LTRH MMIO8(0x005348)	/* ADC1 low threshold register high */
 #define ADC1_LTRL MMIO8(0x005349)	/* ADC1 low threshold register low */
+#define ADC1_SQR_BASE 0x00534A
 #define ADC1_SQR1 MMIO8(0x00534A)	/* ADC1 channel sequence 1 register */
 #define ADC1_SQR2 MMIO8(0x00534B)	/* ADC1 channel sequence 2 register */
 #define ADC1_SQR3 MMIO8(0x00534C)	/* ADC1 channel sequence 3 register */
 #define ADC1_SQR4 MMIO8(0x00534D)	/* ADC1 channel sequence 4 register */
+#define ADC1_TRIGR_BASE 0x00534E
 #define ADC1_TRIGR1 MMIO8(0x00534E)	/* ADC1 trigger disable 1 */
 #define ADC1_TRIGR2 MMIO8(0x00534F)	/* ADC1 trigger disable 2 */
 #define ADC1_TRIGR3 MMIO8(0x005350)	/* ADC1 trigger disable 3 */
@@ -235,5 +237,73 @@
 #define ADC1_TRIGR4_TRIG2	(1 << 2)
 #define ADC1_TRIGR4_TRIG1	(1 << 1)
 #define ADC1_TRIGR4_TRIG0	(1 << 0)
+
+enum adc_smtp {
+  ADC_SMTP_4 = 0x0,
+  ADC_SMTP_9 = 0x1,
+  ADC_SMTP_16 = 0x2,
+  ADC_SMTP_24 = 0x3,
+  ADC_SMTP_48 = 0x4,
+  ADC_SMTP_96 = 0x5,
+  ADC_SMTP_192 = 0x6,
+  ADC_SMTP_384 = 0x7,
+};
+
+#define _REG_BIT(base, bit)		(((base) << 3) + (bit))
+enum adc_channel {
+  ADC_CH_TS = _REG_BIT(0, 5),
+  ADC_CH_VREFINT = _REG_BIT(0, 4),
+  ADC_CH_27 = _REG_BIT(0, 3),
+  ADC_CH_26 = _REG_BIT(0, 2),
+  ADC_CH_25 = _REG_BIT(0, 1),
+  ADC_CH_24 = _REG_BIT(0, 0),
+
+  ADC_CH_23 = _REG_BIT(1, 7),
+  ADC_CH_22 = _REG_BIT(1, 6),
+  ADC_CH_21 = _REG_BIT(1, 5),
+  ADC_CH_20 = _REG_BIT(1, 4),
+  ADC_CH_19 = _REG_BIT(1, 3),
+  ADC_CH_18 = _REG_BIT(1, 2),
+  ADC_CH_17 = _REG_BIT(1, 1),
+  ADC_CH_16 = _REG_BIT(1, 0),
+
+  ADC_CH_15 = _REG_BIT(2, 7),
+  ADC_CH_14 = _REG_BIT(2, 6),
+  ADC_CH_13 = _REG_BIT(2, 5),
+  ADC_CH_12 = _REG_BIT(2, 4),
+  ADC_CH_11 = _REG_BIT(2, 3),
+  ADC_CH_10 = _REG_BIT(2, 2),
+  ADC_CH_9  = _REG_BIT(2, 1),
+  ADC_CH_8  = _REG_BIT(2, 0),
+
+  ADC_CH_7  = _REG_BIT(3, 7),
+  ADC_CH_6  = _REG_BIT(3, 6),
+  ADC_CH_5  = _REG_BIT(3, 5),
+  ADC_CH_4  = _REG_BIT(3, 4),
+  ADC_CH_3  = _REG_BIT(3, 3),
+  ADC_CH_2  = _REG_BIT(3, 2),
+  ADC_CH_1  = _REG_BIT(3, 1),
+  ADC_CH_0  = _REG_BIT(3, 0)
+};
+
+enum adc_resolution {
+  ADC_RES_12 = ADC1_CR1_RES_12,
+  ADC_RES_10 = ADC1_CR1_RES_10,
+  ADC_RES_8  = ADC1_CR1_RES_8,
+  ADC_RES_6  = ADC1_CR1_RES_6
+};
+
+void adc_power_on (void);
+void adc_off (void);
+void adc_set_sample_time (uint8_t channel, enum adc_smtp time);
+void adc_set_sample_time_on_all_channels (enum adc_smtp time);
+void adc_select_channel (enum adc_channel channel);
+void adc_enable_trigger (enum adc_channel channel);
+void adc_set_resolution (enum adc_resolution resolution);
+void adc_start_conversion (void);
+void adc_set_continuous_conversion_mode (void);
+void adc_set_single_conversion_mode (void);
+uint16_t adc_read_regular (void);
+uint8_t adc_eoc (void);
 
 #endif
