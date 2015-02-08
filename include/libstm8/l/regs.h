@@ -70,6 +70,9 @@
 /* COMP register map */
 #include <libstm8/l/comp.h>
 
+/* TIM 1 / TIM 2,3,5 / TIM 4 register map */
+#include <libstm8/l/tim.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -151,102 +154,6 @@
 #define I2C1_CCRH   MMIO8(0x00521C)	/* I2C1 clock control register high */
 #define I2C1_TRISER MMIO8(0x00521D)	/* I2C1 TRISE register */
 #define I2C1_PECR   MMIO8(0x00521E)	/* I2C1 packet error checking register */
-
-#define TIM2_CR1   MMIO8(0x005250)	/* TIM2 control register 1 */
-#define TIM2_CR2   MMIO8(0x005251)	/* TIM2 control register 2 */
-#define TIM2_SMCR  MMIO8(0x005252)	/* TIM2 Slave mode control register */
-#define TIM2_ETR   MMIO8(0x005253)	/* TIM2 external trigger register */
-#define TIM2_DER   MMIO8(0x005254)	/* TIM2 DMA1 request enable register */
-#define TIM2_IER   MMIO8(0x005255)	/* TIM2 interrupt enable register */
-#define TIM2_SR1   MMIO8(0x005256)	/* TIM2 status register 1 */
-#define TIM2_SR2   MMIO8(0x005257)	/* TIM2 status register 2 */
-#define TIM2_EGR   MMIO8(0x005258)	/* TIM2 event generation register */
-#define TIM2_CCMR1 MMIO8(0x005259)	/* TIM2 capture/compare mode register 1 */
-#define TIM2_CCMR2 MMIO8(0x00525A)	/* TIM2 capture/compare mode register 2 */
-#define TIM2_CCER1 MMIO8(0x00525B)	/* TIM2 capture/compare enable register 1 */
-#define TIM2_CNTRH MMIO8(0x00525C)	/* TIM2 counter high */
-#define TIM2_CNTRL MMIO8(0x00525D)	/* TIM2 counter low */
-#define TIM2_PSCR  MMIO8(0x00525E)	/* TIM2 prescaler register */
-#define TIM2_ARRH  MMIO8(0x00525F)	/* TIM2 auto-reload register high */
-#define TIM2_ARRL  MMIO8(0x005260)	/* TIM2 auto-reload register low */
-#define TIM2_CCR1H MMIO8(0x005261)	/* TIM2 capture/compare register 1 high */
-#define TIM2_CCR1L MMIO8(0x005262)	/* TIM2 capture/compare register 1 low */
-#define TIM2_CCR2H MMIO8(0x005263)	/* TIM2 capture/compare register 2 high */
-#define TIM2_CCR2L MMIO8(0x005264)	/* TIM2 capture/compare register 2 low */
-#define TIM2_BKR   MMIO8(0x005265)	/* TIM2 break register */
-#define TIM2_OISR  MMIO8(0x005266)	/* TIM2 output idle state register */
-
-#define TIM3_CR1   MMIO8(0x005280)
-#define TIM3_CR2   MMIO8(0x005281)
-#define TIM3_SMCR  MMIO8(0x005282)
-#define TIM3_ETR   MMIO8(0x005283)
-#define TIM3_DER   MMIO8(0x005284)
-#define TIM3_IER   MMIO8(0x005285)
-#define TIM3_SR1   MMIO8(0x005286)
-#define TIM3_SR2   MMIO8(0x005287)
-#define TIM3_EGR   MMIO8(0x005288)
-#define TIM3_CCMR1 MMIO8(0x005289)
-#define TIM3_CCMR2 MMIO8(0x00528A)
-#define TIM3_CCER1 MMIO8(0x00528B)
-#define TIM3_CNTRH MMIO8(0x00528C)
-#define TIM3_CNTRL MMIO8(0x00528D)
-#define TIM3_PSCR  MMIO8(0x00528E)
-#define TIM3_ARRH  MMIO8(0x00528F)
-#define TIM3_ARRL  MMIO8(0x005290)
-#define TIM3_CCR1H MMIO8(0x005291)
-#define TIM3_CCR1L MMIO8(0x005292)
-#define TIM3_CCR2H MMIO8(0x005293)
-#define TIM3_CCR2L MMIO8(0x005294)
-#define TIM3_BKR   MMIO8(0x005295)
-#define TIM3_OISR  MMIO8(0x005296)
-
-#define TIM1_CR1   MMIO8(0x0052B0)
-#define TIM1_CR2   MMIO8(0x0052B1)
-#define TIM1_SMCR  MMIO8(0x0052B2)
-#define TIM1_ETR   MMIO8(0x0052B3)
-#define TIM1_DER   MMIO8(0x0052B4)
-#define TIM1_IER   MMIO8(0x0052B5)
-#define TIM1_SR1   MMIO8(0x0052B6)
-#define TIM1_SR2   MMIO8(0x0052B7)
-#define TIM1_EGR   MMIO8(0x0052B8)
-#define TIM1_CCMR1 MMIO8(0x0052B9)
-#define TIM1_CCMR2 MMIO8(0x0052BA)
-#define TIM1_CCMR3 MMIO8(0x0052BB)
-#define TIM1_CCMR4 MMIO8(0x0052BC)
-#define TIM1_CCER1 MMIO8(0x0052BD)
-#define TIM1_CCER2 MMIO8(0x0052BE)
-#define TIM1_CNTRH MMIO8(0x0052BF)
-#define TIM1_CNTRL MMIO8(0x0052C0)
-#define TIM1_PSCRH MMIO8(0x0052C1)
-#define TIM1_PSCRL MMIO8(0x0052C2)
-#define TIM1_ARRH  MMIO8(0x0052C3)
-#define TIM1_ARRL  MMIO8(0x0052C4)
-#define TIM1_RCR   MMIO8(0x0052C5)	/* TIM1 Repetition counter register */
-#define TIM1_CCR1H MMIO8(0x0052C6)
-#define TIM1_CCR1L MMIO8(0x0052C7)
-#define TIM1_CCR2H MMIO8(0x0052C8)
-#define TIM1_CCR2L MMIO8(0x0052C9)
-#define TIM1_CCR3H MMIO8(0x0052CA)
-#define TIM1_CCR3L MMIO8(0x0052CB)
-#define TIM1_CCR4H MMIO8(0x0052CC)
-#define TIM1_CCR4L MMIO8(0x0052CD)
-#define TIM1_BKR   MMIO8(0x0052CE)
-#define TIM1_DTR   MMIO8(0x0052CF)	/* TIM1 dead-time register */
-#define TIM1_OISR  MMIO8(0x0052D0)
-#define TIM1_DCR1  MMIO8(0x0052D1)	/* DMA1 control register 1 */
-#define TIM1_DCR2  MMIO8(0x0052D2)	/* DMA1 control register 2 */
-#define TIM1_DMA1R MMIO8(0x0052D3)	/* TIM1 DMA1 address for burst mode */
-
-#define TIM4_CR1   MMIO8(0x0052E0)
-#define TIM4_CR2   MMIO8(0x0052E1)
-#define TIM4_SMCR  MMIO8(0x0052E2)
-#define TIM4_DER   MMIO8(0x0052E3)
-#define TIM4_IER   MMIO8(0x0052E4)
-#define TIM4_SR1   MMIO8(0x0052E5)
-#define TIM4_EGR   MMIO8(0x0052E6)
-#define TIM4_CNTR  MMIO8(0x0052E7)
-#define TIM4_PSCR  MMIO8(0x0052E8)
-#define TIM4_ARR   MMIO8(0x0052E9)
 
 #define IR_CR MMIO8(0x0052FF)	/* Infrared control register */
 
