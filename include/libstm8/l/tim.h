@@ -354,4 +354,494 @@
 #define TIM_IER_CC1IE	(1 << 1) /* CC1 interrupt enabled */
 #define TIM_IER_UIE	(1 << 0) /* Update interrupt enabled */
 
+/* is active level has been detected on the break input */
+#define TIM_SR1_BIF	(1 << 7)
+#define TIM_SR1_TIF	(1 << 6) /* Trigger interrupt pending */
+#define TIM_SR1_COMIF	(1 << 5) /* COM interrupt pending. CC bits updated */
+#define TIM_SR1_CC4IF	(1 << 4)
+#define TIM_SR1_CC3IF	(1 << 3)
+#define TIM_SR1_CC2IF	(1 << 2)
+/* If channel CC1 is configured as output:
+   This flag is set by hardware when the counter matches the compare value.
+   0: No match
+   1: The content of the counter register TIM1_CNT matches the content
+      of the TIM1_CCR1 register
+
+   If channel CC1 is configured as input:
+   This bit is set by hardware on a capture.
+   0: No input capture has occurred
+   1: The counter value has been captured in the TIM1_CCR1 register (an edge
+      has been detected on IC1 which matches the selected polarity).
+*/
+#define TIM_SR1_CC1IF	(1 << 1)
+/* Update interrupt flag.
+   0: No update has occurred
+   1: Update interrupt pending.
+   This bit is set by hardware when the registers are updated:
+   – At overflow or underflow if UDIS = 0 in the TIM1_CR1 register
+   – When CNT is re-initialized by software using the UG bit in TIM1_EGR register,
+     if URS = 0 and UDIS = 0 in the TIM1_CR1 register.
+   – When CNT is re-initialized by a trigger event (refer to the TIM1_SMCR
+     register description), if URS = 0 and UDIS = 0 in the TIM1_CR1 register.
+*/
+#define TIM_SR1_UIF	(1 << 0)
+
+/* This flags is set by hardware only when the corresponding channel
+   is configured in input capture mode.
+   0: No overcapture has been detected
+   1: The counter value has been captured in TIM1_CCR1 register while CC1IF flag
+      was already set.
+*/
+#define TIM_SR2_CC4OF	(1 << 4) /* Capture/compare 4 overcapture flag */
+#define TIM_SR2_CC3OF	(1 << 3)
+#define TIM_SR2_CC2OF	(1 << 2)
+#define TIM_SR2_CC1OF	(1 << 1)
+
+/* set to generate a break event. The MOE bit is cleared and the BIF flag is set.
+   An interrupt is generated if enabled by the BIE bit. */
+#define TIM_EGR_BG	(1 << 7)
+/* Trigger generation. 1: The TIF flag is set in TIMx_SR1 register.
+   An interrupt is generated if enabled by the TIE bit. */
+#define TIM_EGR_TG	(1 << 6)
+/* Capture/compare control update generation.
+   1: When the CCPC bit in the TIMx_CR2 register is set,
+      it allows the CCiE, CCiNE CCiP, CCiNP, and OCiM bits to be updated.
+*/
+#define TIM_EGR_COMG	(1 << 5)
+#define TIM_EGR_CC4G	(1 << 4)
+#define TIM_EGR_CC3G	(1 << 3)
+#define TIM_EGR_CC2G	(1 << 2)
+/* Capture/compare 1 generation.
+   0: No action
+   1: A capture/compare event is generated on channel 1:
+   If the CC1 channel is configured in output mode:
+     The CC1IF flag is set and the corresponding interrupt request
+     is sent if enabled.
+   If the CC1 channel is configured in input mode:
+     The current value of the counter is captured in the TIM1_CCR1 register.
+     The CC1IF flag is set, and the corresponding interrupt request is sent
+     if enabled. The CC1OF flag is set if the CC1IF flag is already high.
+*/
+#define TIM_EGR_CC1G	(1 << 1)
+/* Update generation.
+   Re-initializes the counter and generates an update of the registers.
+   Note that the prescaler counter is also cleared. The counter is cleared
+   if center-aligned mode is selected or if DIR = 0 (up-counting).
+   Otherwise, it takes the auto-reload value (TIM1_ARR) if DIR = 1 (down-counting)
+*/
+#define TIM_EGR_UG	(1 << 0)
+
+/* CHANNEL CONFIGURED IN OUTPUT */
+
+/* Output compare 1 clear enable
+   0: OC1REF is not affected by the OCREFCLR internal signal
+   1: OC1REF is cleared as soon as a high level is detected on the
+      OCREFCLR internal signal
+*/
+#define TIM_CCMR1_OC1CE	(1 << 7)
+/* Output compare 1 preload enable
+   0: Preload register on TIM1_CCR1 disabled. TIM1_CCR1 can be written at anytime.
+      The new value is taken into account immediately.
+   1: Preload register on TIM1_CCR1 enabled. Read/write operations access
+      the preload register. TIM1_CCR1 preload value is loaded in the shadow
+      register at each UEV.
+*/
+#define TIM_CCMR1_OC1PE	(1 << 3)
+/* Output compare 1 fast enable
+   0: CC1 behaves normally depending on the counter and CCR1 values, even when
+      the trigger is on. The minimum delay to activate CC1 output when an edge
+      occurs on the trigger input, is 5 clock cycles.
+   1: An active edge on the trigger input acts like a compare match on the
+      CC1 output. If this happens, OC is set to the compare level irrespective
+      of the result of the comparison. The delay to sample the trigger input
+      and to activate CC1 output is reduced to 3 clock cycles. OCFE acts
+      only if the channel is configured in PWM1 or PWM2 mode.
+*/
+#define TIM_CCMR1_OC1FE	(1 << 2)
+/* Output compare 1 mode. These bits define the behavior of the
+   output reference signal, OC1REF, from which OC1 is derived.
+*/
+#define TIM_CCMR1_OC1M_SHIFT	4
+#define TIM_CCMR1_OC1M_MASK	0x7
+/* The comparison between the output compare register TIM1_CCR1 and the counter
+   register TIM1_CNT has no effect on the outputs.
+*/
+#define TIM_CCMR1_OC1M_FROZEN	0x0
+/* Set channel 1 to active level on match - OC1REF signal is forced high when
+   the counter register TIM1_CNT matches the capture/compare register 1 (TIM1_CCR1)
+*/
+#define TIM_CCMR1_OC1M_MATCH_ACTIVE	0x1
+#define TIM_CCMR1_OC1M_MATCH_INACTIVE	0x2 /* inactive level on match */
+#define TIM_CCMR1_OC1M_TOGGLE	0x3 /* OC1REF toggles when TIM1_CNT = TIM1_CCR1 */
+#define TIM_CCMR1_OC1M_FORCE_INACTIVE	0x4 /* OC1REF is forced low */
+#define TIM_CCMR1_OC1M_FORCE_ACTIVE	0x5 /* OC1REF is forced high */
+/* PWM mode 1 - In up-counting, channel 1 is active as long as
+   TIM1_CNT < TIM1_CCR1, otherwise, the channel is inactive. In down-counting,
+   channel 1 is inactive (OC1REF = 0) as long as TIM1_CNT > TIM1_CCR1,
+   otherwise, the channel is active (OC1REF = 1).
+*/
+#define TIM_CCMR1_OC1M_PWM_1	0x6
+#define TIM_CCMR1_OC1M_PWM_2	0x7 /* PWM mode 2 -- reverse rules from mode 1 */
+/* Capture/compare 1 selection. This bitfield defines the direction of the
+   channel (input/output) as well as the used input.
+*/
+#define TIM_CCMR1_CC1S_SHIFT	0
+#define TIM_CCMR1_CC1S_MASK	0x3
+#define TIM_CCMR1_CC1S_OUTPUT	0x0 /* CC1 channel is configured as output */
+#define TIM_CCMR1_CC1S_INPUT_TI1FP1 0x1 /* CC1 input. IC1 is mapped on TI1FP1 */
+#define TIM_CCMR1_CC1S_INPUT_TI2FP1 0x2 /* CC1 input. IC1 is mapped on TI2FP1 */
+/* CC1 channel is configured as input, IC1 is mapped on TRC.
+   This mode works only if an internal trigger input is selected
+   through the TS bit (TIM1_SMCR register).
+*/
+#define TIM_CCMR1_CC1S_INPUT_TRC	0x3
+
+/* CHANNEL CONFIGURED IN INPUT */
+
+/* Input capture 1 filter. This bitfield defines f SAMPLING, the frequency
+   used to sample TI1 input and the length of the digital filter applied to TI1.
+   The digital filter is made of an event counter in which N events are needed
+   to validate a transition on the output:
+*/
+#define TIM_CCMR1_IC1F_SHIFT	4
+#define TIM_CCMR1_IC1F_MASK	0xF
+#define TIM_CCMR1_IC1F_NONE	0x0 /* No filter, sampling is done at f_SYSCLK */
+#define TIM_CCMR1_IC1F_1_2	0x1 /* f_SAMPLING = f_SYSCLK / 1 , N = 2 */
+#define TIM_CCMR1_IC1F_1_4	0x2
+#define TIM_CCMR1_IC1F_1_8	0x3
+#define TIM_CCMR1_IC1F_2_6	0x4
+#define TIM_CCMR1_IC1F_2_8	0x5
+#define TIM_CCMR1_IC1F_4_6	0x6
+#define TIM_CCMR1_IC1F_4_8	0x7
+#define TIM_CCMR1_IC1F_8_6	0x8
+#define TIM_CCMR1_IC1F_8_8	0x9
+#define TIM_CCMR1_IC1F_16_5	0xA
+#define TIM_CCMR1_IC1F_16_6	0xB
+#define TIM_CCMR1_IC1F_16_8	0xC
+#define TIM_CCMR1_IC1F_32_5	0xD
+#define TIM_CCMR1_IC1F_32_6	0xE
+#define TIM_CCMR1_IC1F_32_8	0xF /* f_SAMPLING = f_SYSCLK / 32 , N = 8 */
+/* This bitfield defines the ratio of the prescaler acting on CC1 input (IC1).
+   The prescaler is reset as soon as CC1E = 0 (TIM1_CCER register).
+*/
+#define TIM_CCMR1_IC1PSC_SHIFT	2
+#define TIM_CCMR1_IC1PSC_MASK	0x3
+/* No prescaler, capture is made each time an edge is detected on capture input */
+#define TIM_CCMR1_IC1PSC_1	0x0
+#define TIM_CCMR1_IC1PSC_2	0x1 /* Capture is made once every 2 events */
+#define TIM_CCMR1_IC1PSC_4	0x2
+#define TIM_CCMR1_IC1PSC_8	0x3 /* Capture is made once every 8 events */
+/* TIM_CCMR1_CC1S same as before for output */
+
+
+/* CHANNEL CONFIGURED IN OUTPUT */
+#define TIM_CCMR2_OC2CE TIM_CCMR1_OC1CE
+#define TIM_CCMR2_OC2PE	TIM_CCMR1_OC1PE
+#define TIM_CCMR2_OC2FE	TIM_CCMR1_OC1FE
+#define TIM_CCMR2_OC2M_SHIFT	TIM_CCMR1_OC1M_SHIFT
+#define TIM_CCMR2_OC2M_MASK	TIM_CCMR1_OC1M_MASK
+#define TIM_CCMR2_OC2M_FROZEN	TIM_CCMR1_OC1M_FROZEN
+#define TIM_CCMR2_OC2M_MATCH_ACTIVE	TIM_CCMR1_OC1M_MATCH_ACTIVE
+#define TIM_CCMR2_OC2M_MATCH_INACTIVE	TIM_CCMR1_OC1M_MATCH_INACTIVE
+#define TIM_CCMR2_OC2M_TOGGLE	TIM_CCMR1_OC1M_TOGGLE
+#define TIM_CCMR2_OC2M_FORCE_INACTIVE	TIM_CCMR1_OC1M_FORCE_INACTIVE
+#define TIM_CCMR2_OC2M_FORCE_ACTIVE	TIM_CCMR1_OC1M_FORCE_ACTIVE
+#define TIM_CCMR2_OC2M_PWM_1	TIM_CCMR1_OC1M_PWM_1
+#define TIM_CCMR2_OC2M_PWM_2	TIM_CCMR1_OC1M_PWM_2
+#define TIM_CCMR2_CC2S_SHIFT	TIM_CCMR1_CC1S_SHIFT
+#define TIM_CCMR2_CC2S_MASK	TIM_CCMR1_CC1S_MASK
+#define TIM_CCMR2_CC2S_OUTPUT	TIM_CCMR1_CC1S_OUTPUT
+#define TIM_CCMR2_CC2S_INPUT_TI1FP2 TIM_CCMR1_CC1S_INPUT_TI1FP1
+#define TIM_CCMR2_CC2S_INPUT_TI2FP2 TIM_CCMR1_CC1S_INPUT_TI2FP1
+#define TIM_CCMR2_CC2S_INPUT_TRC	TIM_CCMR1_CC1S_INPUT_TRC
+/* CHANNEL CONFIGURED IN INPUT */
+#define TIM_CCMR2_IC2F_SHIFT	TIM_CCMR1_IC1F_SHIFT
+#define TIM_CCMR2_IC2F_MASK	TIM_CCMR1_IC1F_MASK
+#define TIM_CCMR2_IC2F_NONE	TIM_CCMR1_IC1F_NONE
+#define TIM_CCMR2_IC2F_1_2	TIM_CCMR1_IC1F_1_2
+#define TIM_CCMR2_IC2F_1_4	TIM_CCMR1_IC1F_1_4
+#define TIM_CCMR2_IC2F_1_8	TIM_CCMR1_IC1F_1_8
+#define TIM_CCMR2_IC2F_2_6	TIM_CCMR1_IC1F_2_6
+#define TIM_CCMR2_IC2F_2_8	TIM_CCMR1_IC1F_2_8
+#define TIM_CCMR2_IC2F_4_6	TIM_CCMR1_IC1F_4_6
+#define TIM_CCMR2_IC2F_4_8	TIM_CCMR1_IC1F_4_8
+#define TIM_CCMR2_IC2F_8_6	TIM_CCMR1_IC1F_8_6
+#define TIM_CCMR2_IC2F_8_8	TIM_CCMR1_IC1F_8_8
+#define TIM_CCMR2_IC2F_16_5	TIM_CCMR1_IC1F_16_5
+#define TIM_CCMR2_IC2F_16_6	TIM_CCMR1_IC1F_16_6
+#define TIM_CCMR2_IC2F_16_8	TIM_CCMR1_IC1F_16_8
+#define TIM_CCMR2_IC2F_32_5	TIM_CCMR1_IC1F_32_5
+#define TIM_CCMR2_IC2F_32_6	TIM_CCMR1_IC1F_32_6
+#define TIM_CCMR2_IC2F_32_8	TIM_CCMR1_IC1F_32_8
+#define TIM_CCMR2_IC2PSC_SHIFT	TIM_CCMR1_IC1PSC_SHIFT
+#define TIM_CCMR2_IC2PSC_MASK	TIM_CCMR1_IC1PSC_MASK
+#define TIM_CCMR2_IC2PSC_1	TIM_CCMR1_IC1PSC_1
+#define TIM_CCMR2_IC2PSC_2	TIM_CCMR1_IC1PSC_2
+#define TIM_CCMR2_IC2PSC_4	TIM_CCMR1_IC1PSC_4
+#define TIM_CCMR2_IC2PSC_8	TIM_CCMR1_IC1PSC_8
+/* TIM_CCMR2_CC2S same as before for output */
+
+/* CHANNEL CONFIGURED IN OUTPUT */
+#define TIM_CCMR3_OC3CE TIM_CCMR1_OC1CE
+#define TIM_CCMR3_OC3PE	TIM_CCMR1_OC1PE
+#define TIM_CCMR3_OC3FE	TIM_CCMR1_OC1FE
+#define TIM_CCMR3_OC3M_SHIFT	TIM_CCMR1_OC1M_SHIFT
+#define TIM_CCMR3_OC3M_MASK	TIM_CCMR1_OC1M_MASK
+#define TIM_CCMR3_OC3M_FROZEN	TIM_CCMR1_OC1M_FROZEN
+#define TIM_CCMR3_OC3M_MATCH_ACTIVE	TIM_CCMR1_OC1M_MATCH_ACTIVE
+#define TIM_CCMR3_OC3M_MATCH_INACTIVE	TIM_CCMR1_OC1M_MATCH_INACTIVE
+#define TIM_CCMR3_OC3M_TOGGLE	TIM_CCMR1_OC1M_TOGGLE
+#define TIM_CCMR3_OC3M_FORCE_INACTIVE	TIM_CCMR1_OC1M_FORCE_INACTIVE
+#define TIM_CCMR3_OC3M_FORCE_ACTIVE	TIM_CCMR1_OC1M_FORCE_ACTIVE
+#define TIM_CCMR3_OC3M_PWM_1	TIM_CCMR1_OC1M_PWM_1
+#define TIM_CCMR3_OC3M_PWM_2	TIM_CCMR1_OC1M_PWM_2
+#define TIM_CCMR3_CC3S_SHIFT	TIM_CCMR1_CC1S_SHIFT
+#define TIM_CCMR3_CC3S_MASK	TIM_CCMR1_CC1S_MASK
+#define TIM_CCMR3_CC3S_OUTPUT	TIM_CCMR1_CC1S_OUTPUT
+#define TIM_CCMR3_CC3S_INPUT_TI3FP3 TIM_CCMR1_CC1S_INPUT_TI1FP1
+#define TIM_CCMR3_CC3S_INPUT_TRC	TIM_CCMR1_CC1S_INPUT_TRC
+/* CHANNEL CONFIGURED IN INPUT */
+#define TIM_CCMR3_IC3F_SHIFT	TIM_CCMR1_IC1F_SHIFT
+#define TIM_CCMR3_IC3F_MASK	TIM_CCMR1_IC1F_MASK
+#define TIM_CCMR3_IC3F_NONE	TIM_CCMR1_IC1F_NONE
+#define TIM_CCMR3_IC3F_1_2	TIM_CCMR1_IC1F_1_2
+#define TIM_CCMR3_IC3F_1_4	TIM_CCMR1_IC1F_1_4
+#define TIM_CCMR3_IC3F_1_8	TIM_CCMR1_IC1F_1_8
+#define TIM_CCMR3_IC3F_2_6	TIM_CCMR1_IC1F_2_6
+#define TIM_CCMR3_IC3F_2_8	TIM_CCMR1_IC1F_2_8
+#define TIM_CCMR3_IC3F_4_6	TIM_CCMR1_IC1F_4_6
+#define TIM_CCMR3_IC3F_4_8	TIM_CCMR1_IC1F_4_8
+#define TIM_CCMR3_IC3F_8_6	TIM_CCMR1_IC1F_8_6
+#define TIM_CCMR3_IC3F_8_8	TIM_CCMR1_IC1F_8_8
+#define TIM_CCMR3_IC3F_16_5	TIM_CCMR1_IC1F_16_5
+#define TIM_CCMR3_IC3F_16_6	TIM_CCMR1_IC1F_16_6
+#define TIM_CCMR3_IC3F_16_8	TIM_CCMR1_IC1F_16_8
+#define TIM_CCMR3_IC3F_32_5	TIM_CCMR1_IC1F_32_5
+#define TIM_CCMR3_IC3F_32_6	TIM_CCMR1_IC1F_32_6
+#define TIM_CCMR3_IC3F_32_8	TIM_CCMR1_IC1F_32_8
+#define TIM_CCMR3_IC3PSC_SHIFT	TIM_CCMR1_IC1PSC_SHIFT
+#define TIM_CCMR3_IC3PSC_MASK	TIM_CCMR1_IC1PSC_MASK
+#define TIM_CCMR3_IC3PSC_1	TIM_CCMR1_IC1PSC_1
+#define TIM_CCMR3_IC3PSC_2	TIM_CCMR1_IC1PSC_2
+#define TIM_CCMR3_IC3PSC_4	TIM_CCMR1_IC1PSC_4
+#define TIM_CCMR3_IC3PSC_8	TIM_CCMR1_IC1PSC_8
+/* TIM_CCMR3_CC3S same as before for output */
+
+/* CHANNEL CONFIGURED IN OUTPUT */
+#define TIM_CCMR4_OC4CE TIM_CCMR1_OC1CE
+#define TIM_CCMR4_OC4PE	TIM_CCMR1_OC1PE
+#define TIM_CCMR4_OC4M_SHIFT	TIM_CCMR1_OC1M_SHIFT
+#define TIM_CCMR4_OC4M_MASK	TIM_CCMR1_OC1M_MASK
+#define TIM_CCMR4_OC4M_FROZEN	TIM_CCMR1_OC1M_FROZEN
+#define TIM_CCMR4_OC4M_MATCH_ACTIVE	TIM_CCMR1_OC1M_MATCH_ACTIVE
+#define TIM_CCMR4_OC4M_MATCH_INACTIVE	TIM_CCMR1_OC1M_MATCH_INACTIVE
+#define TIM_CCMR4_OC4M_TOGGLE	TIM_CCMR1_OC1M_TOGGLE
+#define TIM_CCMR4_OC4M_FORCE_INACTIVE	TIM_CCMR1_OC1M_FORCE_INACTIVE
+#define TIM_CCMR4_OC4M_FORCE_ACTIVE	TIM_CCMR1_OC1M_FORCE_ACTIVE
+#define TIM_CCMR4_OC4M_PWM_1	TIM_CCMR1_OC1M_PWM_1
+#define TIM_CCMR4_OC4M_PWM_2	TIM_CCMR1_OC1M_PWM_2
+#define TIM_CCMR4_CC4S_SHIFT	TIM_CCMR1_CC1S_SHIFT
+#define TIM_CCMR4_CC4S_MASK	TIM_CCMR1_CC1S_MASK
+#define TIM_CCMR4_CC4S_OUTPUT	TIM_CCMR1_CC1S_OUTPUT
+#define TIM_CCMR4_CC4S_INPUT_TI3FP4 TIM_CCMR1_CC1S_INPUT_TI2FP1
+#define TIM_CCMR4_CC4S_INPUT_TRC	TIM_CCMR1_CC1S_INPUT_TRC
+/* CHANNEL CONFIGURED IN INPUT */
+#define TIM_CCMR4_IC4F_SHIFT	TIM_CCMR1_IC1F_SHIFT
+#define TIM_CCMR4_IC4F_MASK	TIM_CCMR1_IC1F_MASK
+#define TIM_CCMR4_IC4F_NONE	TIM_CCMR1_IC1F_NONE
+#define TIM_CCMR4_IC4F_1_2	TIM_CCMR1_IC1F_1_2
+#define TIM_CCMR4_IC4F_1_4	TIM_CCMR1_IC1F_1_4
+#define TIM_CCMR4_IC4F_1_8	TIM_CCMR1_IC1F_1_8
+#define TIM_CCMR4_IC4F_2_6	TIM_CCMR1_IC1F_2_6
+#define TIM_CCMR4_IC4F_2_8	TIM_CCMR1_IC1F_2_8
+#define TIM_CCMR4_IC4F_4_6	TIM_CCMR1_IC1F_4_6
+#define TIM_CCMR4_IC4F_4_8	TIM_CCMR1_IC1F_4_8
+#define TIM_CCMR4_IC4F_8_6	TIM_CCMR1_IC1F_8_6
+#define TIM_CCMR4_IC4F_8_8	TIM_CCMR1_IC1F_8_8
+#define TIM_CCMR4_IC4F_16_5	TIM_CCMR1_IC1F_16_5
+#define TIM_CCMR4_IC4F_16_6	TIM_CCMR1_IC1F_16_6
+#define TIM_CCMR4_IC4F_16_8	TIM_CCMR1_IC1F_16_8
+#define TIM_CCMR4_IC4F_32_5	TIM_CCMR1_IC1F_32_5
+#define TIM_CCMR4_IC4F_32_6	TIM_CCMR1_IC1F_32_6
+#define TIM_CCMR4_IC4F_32_8	TIM_CCMR1_IC1F_32_8
+#define TIM_CCMR4_IC4PSC_SHIFT	TIM_CCMR1_IC1PSC_SHIFT
+#define TIM_CCMR4_IC4PSC_MASK	TIM_CCMR1_IC1PSC_MASK
+#define TIM_CCMR4_IC4PSC_1	TIM_CCMR1_IC1PSC_1
+#define TIM_CCMR4_IC4PSC_2	TIM_CCMR1_IC1PSC_2
+#define TIM_CCMR4_IC4PSC_4	TIM_CCMR1_IC1PSC_4
+#define TIM_CCMR4_IC4PSC_8	TIM_CCMR1_IC1PSC_8
+/* TIM_CCMR4_CC4S same as before for output */
+
+#define TIM_CCER1_CC2NP	(1 << 7)
+#define TIM_CCER1_CC2NE	(1 << 6)
+#define TIM_CCER1_CC2P	(1 << 5)
+#define TIM_CCER1_CC2E	(1 << 4)
+/* Capture/compare 1 complementary output polarity */
+#define TIM_CCER1_CC1NP	(1 << 3) /* OC1N active high 0 / low 1 */
+/* 0: Off - OC1N is not active. OC1N level is then a function of
+      the MOE, OSSI, OSSR, OIS1, OIS1N and CC1E bits.
+   1: On - OC1N signal is output on the corresponding output pin depending
+      on the MOE, OSSI, OSSR, OIS1, OIS1N and CC1E bits.
+*/
+#define TIM_CCER1_CC1NE	(1 << 2)
+/* CC1P: Capture/compare 1 output polarity
+
+   CC1 channel configured as output:
+   0: OC1 active high
+   1: OC1 active low
+
+   CC1 channel configured as input for trigger function (see table lower):
+   0: Trigger on a high level or rising edge of TI1F
+   1: Trigger on a low level or falling edge of TI1F
+
+   CC1 channel configured as input for capture function (see table lower):
+   0: Capture on a rising edge of TI1F or TI2F
+   1: Capture on a falling edge of TI1F or TI2F
+*/
+#define TIM_CCER1_CC1P	(1 << 1)
+/* Capture/compare 1 output enable
+
+   CC1 channel is configured as output:
+   0: Off - OC1 is not active. OC1 level is then a function of
+      the MOE, OSSI, OSSR, OIS1, OIS1N and CC1NE bits.
+   1: On - OC1 signal is output on the corresponding output pin depending on
+      the MOE, OSSI, OSSR, OIS1, OIS1N and CC1NE bits.
+
+   CC1 channel is configured as input:
+   This bit determines if a capture of the counter value can be made in the
+   input capture/compare register 1 (TIM1_CCR1) or not:
+   0: Capture disabled
+   1: Capture enabled
+*/
+#define TIM_CCER1_CC1E	(1 << 0) /*  */
+/*
+|------------------------+------------------------------------------------------------|
+|Control bits            | Output states                                              |
+|---+----+----+----+-----+----------------------------+-------------------------------|
+|MOE|OSSI|OSSR|CCiE|CCiNE| OCi                        | OCiN                          |
+|---+----+----+----+-----+----------------------------+-------------------------------|
+| 1 | x  |  0 |  0 |  0  | Output disabled            | Output disabled               |
+|   |    |    |    |     | (not driven by the timer)  | (not driven by the timer)     |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  0 |  0 |  1  | Output disabled            | OCiREF + polarity OCiN =      |
+|   |    |    |    |     | (not driven by the timer)  | OCiREF xor CCiNP              |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  0 |  1 |  0  | OCiREF + polarity OCi =    | Output disabled               |
+|   |    |    |    |     | OCiREF xor CCiP            | (not driven by the timer)     |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  0 |  1 |  1  | OCiREF + polarity +        | Complementary to OCiREF       |
+|   |    |    |    |     | deadtime                   | (not OCiREF) + polarity +     |
+|   |    |    |    |     |                            | deadtime                      |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  1 |  0 |  0  | Output disabled            | Output disabled               |
+|   |    |    |    |     | (not driven by the timer)  | (not driven by the timer)     |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  1 |  0 |  1  | Off state                  | OCiREF + polarity OCiN =      |
+|   |    |    |    |     | (output enabled with       | OCiREF xor CCiNP              |
+|   |    |    |    |     | inactive state) OCi = CCiP |                               |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  1 |  1 |  0  | OCiREF + polarity OCi =    | Off state                     |
+|   |    |    |    |     | OCiREF xor CCiP            | (output enabled with inactive |
+|   |    |    |    |     |                            | state) OCiN = CCiNP           |
+|   |    |----+----+-----+----------------------------+-------------------------------|
+|   |    |  1 |  1 |  1  | OCiREF + polarity +        | Complementary to OCiREF       |
+|   |    |    |    |     | deadtime                   | (not OCiREF) + polarity +     |
+|   |    |    |    |     |                            | deadtime                      |
+|---+----+----+----+-----+----------------------------+-------------------------------|
+| 0 | 0  |  x |  x |  x  | Output disabled (not driven by the timer)                  |
+|   |----+----+----+-----+-------------------------------+----------------------------|
+|   | 1  |  x |  x |  x  | Off state (output enabled with inactive state)             |
+|   |    |    |    |     | Asynchronously: OCi = CCiP and OCiN = CCiNP                |
+|   |    |    |    |     | Then if the clock is present: OCi = OISi and OCiN = OISiN  |
+|   |    |    |    |     | after a deadtime, assuming that OISi and OISiN do not      |
+|   |    |    |    |     | correspond with OCi and OCiN in active state               |
+|---+----+----+----+-----+-------------------------------+----------------------------|
+*/
+
+/* same description as before */
+#define TIM_CCER2_CC4P	(1 << 5)
+#define TIM_CCER2_CC4E	(1 << 4)
+#define TIM_CCER2_CC3NP	(1 << 3)
+#define TIM_CCER2_CC3NE	(1 << 2)
+#define TIM_CCER2_CC3P	(1 << 1)
+#define TIM_CCER2_CC3E	(1 << 0)
+
+/* TIM_CNTRH:TIM_CNTRL -- 16 bit counter value */
+/* TIM_PSCRH:TIM_PSCRL -- 16 bit prescaler register
+   The counter clock frequency f CK_CNT is equal to f CK_PSC / (PSCR[15:0]+1).
+*/
+/* TIM_ARRH:TIM_ARRL -- 16 bit auto-reload value */
+/* TIM_RCR -- Repetition counter value (REP).
+
+   When the preload registers are enabled, these bits allow the user to set up
+   the update rate of the compare registers (periodic transfers from preload to
+   shadow registers) as well as the update interrupt generation rate if the
+   update interrupt is enabled (UIE=1). Each time the REP_CNT related
+   down-counter reaches zero, a UEV is generated and it restarts counting from
+   the REP value. As REP_CNT is reloaded with the REP value only at the
+   repetition update event U_RC, any write to the TIM1_RCR register is not taken
+   into account until the next repetition update event.
+
+   In PWM mode (REP+1) corresponds to:
+   – The number of PWM periods in edge-aligned mode
+   – The number of half PWM periods in center-aligned mode
+*/
+/* TIM_CCR1H:TIM_CCR1L -- 16 bit capture/compare 1 value.
+
+   If the CC1 channel is configured as output (CC1S bits in TIM1_CCMR1 register):
+   The value of CCR1 is loaded permanently into the actual capture/compare 1
+   register if the preload feature is enabled (OC1PE bit in
+   TIMx_CCMR1). Otherwise, the preload value is copied in the active
+   capture/compare 1 register when a UEV occurs. The active capture/compare
+   register contains the value which is compared to the counter register,
+   TIMx_CNT, and signalled on the OC1 output.
+
+   If the CC1 channel is configured as input (CC1S bits in TIM1_CCMR1 register):
+   The value of CCR1 is the counter value transferred by the last input capture
+   1 event (IC1). In this case, these bits are read only.
+*/
+
+#define TIM_BKR_MOE	(1 << 7) /* Main output enable. is OC and OCN enabled */
+/* Automatic output enable. MOE can be set by UEV */
+#define TIM_BKR_AOE	(1 << 6)
+#define TIM_BKR_BKP	(1 << 5) /* Break input BKIN is active low 0 / high 1 */
+#define TIM_BKR_BKE	(1 << 4) /* is Break input (BKIN) enabled */
+/* Off state selection for Run mode.
+   This bit is used when MOE = 1 on channels with a complementary output
+   which are configured as outputs.
+   0: When inactive, OC/OCN outputs are disabled (OC/OCN enable output signal = 0)
+   1: When inactive, OC/OCN outputs are enabled with their inactive level
+      as soon as CCiE = 1 or CCiNE = 1, after which the OC/OCN enable
+      output signal = 1
+*/
+#define TIM_BKR_OSSR	(1 << 3)
+/* Off state selection for idle mode
+   This bit is used when MOE = 0 on channels configured as outputs.
+   0: When inactive, OCi outputs are disabled (OCi enable output signal = 0)
+   1: When inactive, OCi outputs are forced first with their idle level
+      as soon as CCiE = 1 (OC enable output signal = 1)
+*/
+#define TIM_BKR_OSSI	(1 << 2)
+/* Lock configuration
+   These bits offer a write protection against software errors.
+*/
+#define TIM_BKR_LOCK_SHIFT	0
+#define TIM_BKR_LOCK_MASK	0x3
+#define TIM_BKR_LOCK_OFF	0x0 /* No bits are write protected */
+/* OISi bit in TIM1_OISR register and BKE/BKP/AOE bits in TIM1_BKR register
+   can no longer be written.
+*/
+#define TIM_BKR_LOCK_1		0x1
+/* LOCK level 1 + CC polarity bits (CCiP bits in TIM1_CCERi registers, as long
+   as the related channel is configured in output through the CCiS bits) as well
+   as the OSSR and OSSI bits can no longer be written.
+*/
+#define TIM_BKR_LOCK_2		0x2
+/* LOCK level 2 + CC control bits (OCiM and OCiPE bits in TIM1_CCMRi registers,
+   as long as the related channel is configured in output through the CCiS bits)
+   can no longer be written.
+*/
+#define TIM_BKR_LOCK_3		0x3
+
+
 #endif
