@@ -76,6 +76,9 @@
 /* IRTIM register map */
 #include <libstm8/l/ir.h>
 
+/* BEEP register map */
+#include <libstm8/l/beep.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -101,9 +104,6 @@
 #define IWDG_KR  MMIO8(0x0050E0)	/* IWDG key register */
 #define IWDG_PR  MMIO8(0x0050E1)	/* IWDG prescaler register */
 #define IWDG_RLR MMIO8(0x0050E2)	/* IWDG reload register */
-
-#define BEEP_CSR1 MMIO8(0x0050F0)	/* BEEP control/status register 1 */
-#define BEEP_CSR2 MMIO8(0x0050F3)	/* BEEP control/status register 2 */
 
 #define RTC_TR1 MMIO8(0x005140)	/* Time register 1 */
 #define RTC_TR2 MMIO8(0x005141)	/* Time register 2 */
