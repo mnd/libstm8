@@ -88,6 +88,9 @@
 /* AES register map */
 #include <libstm8/l/aes.h>
 
+/* I2C register map */
+#include <libstm8/l/i2c.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -144,21 +147,6 @@
 #define SPI1_CRCPR  MMIO8(0x005205)	/* SPI1 CRC polynomial register */
 #define SPI1_RXCRCR MMIO8(0x005206)	/* SPI1 Rx CRC register */
 #define SPI1_TXCRCR MMIO8(0x005207)	/* SPI1 Tx CRC register */
-
-#define I2C1_CR1    MMIO8(0x005210)	/* I2C1 control register 1 */
-#define I2C1_CR2    MMIO8(0x005211)	/* I2C1 control register 2 */
-#define I2C1_FREQR  MMIO8(0x005212)	/* I2C1 frequency register */
-#define I2C1_OARL   MMIO8(0x005213)	/* I2C1 own address register low */
-#define I2C1_OARH   MMIO8(0x005214)	/* I2C1 own address register high */
-#define I2C1_DR     MMIO8(0x005216)	/* I2C1 data register */
-#define I2C1_SR1    MMIO8(0x005217)	/* I2C1 status register 1 */
-#define I2C1_SR2    MMIO8(0x005218)	/* I2C1 status register 2 */
-#define I2C1_SR3    MMIO8(0x005219)	/* I2C1 status register 3 */
-#define I2C1_ITR    MMIO8(0x00521A)	/* I2C1 interrupt control register */
-#define I2C1_CCRL   MMIO8(0x00521B)	/* I2C1 clock control register low */
-#define I2C1_CCRH   MMIO8(0x00521C)	/* I2C1 clock control register high */
-#define I2C1_TRISER MMIO8(0x00521D)	/* I2C1 TRISE register */
-#define I2C1_PECR   MMIO8(0x00521E)	/* I2C1 packet error checking register */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
