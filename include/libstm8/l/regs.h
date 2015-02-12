@@ -94,6 +94,12 @@
 /* SPI register map */
 #include <libstm8/l/spi.h>
 
+/* ITC register map */
+#include <libstm8/l/itc.h>
+
+/* EXTI register map */
+#include <libstm8/l/exti.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -101,13 +107,6 @@
 #define FLASH_PUKR  MMIO8(0x005052)	/* Flash program memory unprotection key register */
 #define FLASH_DUKR  MMIO8(0x005053)	/* Data EEPROM unprotection key register */
 #define FLASH_IAPSR MMIO8(0x005054)	/* Flash in-application programming status register */
-
-#define EXTI_CR1   MMIO8(0x0050A0)	/* External interrupt control register 1 */
-#define EXTI_CR2   MMIO8(0x0050A1)	/* External interrupt control register 2 */
-#define EXTI_CR3   MMIO8(0x0050A2)	/* External interrupt control register 3 */
-#define EXTI_SR1   MMIO8(0x0050A3)	/* External interrupt status register 1 */
-#define EXTI_SR2   MMIO8(0x0050A4)	/* External interrupt status register 2 */
-#define EXTI_CONF1 MMIO8(0x0050A5)	/* External interrupt port select register 1 */
 
 #define WFE_CR1 MMIO8(0x0050A6)	/* WFE control register 1 */
 #define WFE_CR2 MMIO8(0x0050A7)	/* WFE control register 2 */
@@ -158,15 +157,6 @@
 #define CPU_CCR MMIO8(0x007F0A)	/* Condition code register */
 
 #define CFG_GCR MMIO8(0x007F60)	/* Global configuration register */
-
-#define ITC_SPR1 MMIO8(0x007F70)	/* Interrupt Software priority register 1 */
-#define ITC_SPR2 MMIO8(0x007F71)	/* Interrupt Software priority register 2 */
-#define ITC_SPR3 MMIO8(0x007F72)	/* Interrupt Software priority register 3 */
-#define ITC_SPR4 MMIO8(0x007F73)	/* Interrupt Software priority register 4 */
-#define ITC_SPR5 MMIO8(0x007F74)	/* Interrupt Software priority register 5 */
-#define ITC_SPR6 MMIO8(0x007F75)	/* Interrupt Software priority register 6 */
-#define ITC_SPR7 MMIO8(0x007F76)	/* Interrupt Software priority register 7 */
-#define ITC_SPR8 MMIO8(0x007F77)	/* Interrupt Software priority register 8 */
 
 #define SWIM_CSR MMIO8(0x007F80)	/* SWIM control status register */
 
