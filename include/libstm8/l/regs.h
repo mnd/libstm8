@@ -85,6 +85,9 @@
 /* WWDG register map */
 #include <libstm8/l/wwdg.h>
 
+/* AES register map */
+#include <libstm8/l/aes.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
