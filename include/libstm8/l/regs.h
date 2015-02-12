@@ -100,16 +100,13 @@
 /* EXTI register map */
 #include <libstm8/l/exti.h>
 
-/* WFE mode registers */
+/* WFE mode register map */
 #include <libstm8/l/wfe.h>
 
-/* General hardware register map */
+/* FLASH register map */
+#include <libstm8/l/flash.h>
 
-#define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
-#define FLASH_CR2   MMIO8(0x005051)	/* Flash control register 2 */
-#define FLASH_PUKR  MMIO8(0x005052)	/* Flash program memory unprotection key register */
-#define FLASH_DUKR  MMIO8(0x005053)	/* Data EEPROM unprotection key register */
-#define FLASH_IAPSR MMIO8(0x005054)	/* Flash in-application programming status register */
+/* General hardware register map */
 
 #define RTC_TR1 MMIO8(0x005140)	/* Time register 1 */
 #define RTC_TR2 MMIO8(0x005141)	/* Time register 2 */
@@ -171,29 +168,40 @@
 #define DM_CSR2   MMIO8(0x007F99) /* DM Debug module control/status register 2 */
 #define DM_ENFCTR MMIO8(0x007F9A) /* DM enable function register */
 
-#define OPT_ROP   MMIO8(0x004800) /* Memory readout protection (ROP). 0xAA: Disable readout protection (write access via SWIM protocol) */
+/* Memory readout protection (ROP).
+   0xAA: Disable readout protection (write access via SWIM protocol) */
+#define OPT_ROP   MMIO8(0x004800)
 #define OPT_UBC   MMIO8(0x004802) /* Size of the user boot code area. */
 #define OPT_WDG   MMIO8(0x004808) /* Independent watchdog option */
-#define OPT_CLOCK MMIO8(0x004809) /* Number of stabilization clock cycles for HSE and LSE oscillators */
+/* Number of stabilization clock cycles for HSE and LSE oscillators */
+#define OPT_CLOCK MMIO8(0x004809)
 #define OPT_BOR   MMIO8(0x00480A) /* Brownout reset */
 #define OPT_BL    MMIO16(0x00480B) /* Bootloader option 2 bytes */
-/* option OPT_BL is checked by the boot ROM code after reset. Depending on content
-of addresses 00 480B, 00 480C and 0x8000 (reset vector) the CPU jumps to the
-bootloader or to the reset vector.  Refer to the UM0560 bootloader user manual
-for more details. */
+/* option OPT_BL is checked by the boot ROM code after reset. Depending on
+   content of addresses 00 480B, 00 480C and 0x8000 (reset vector) the CPU jumps
+   to the bootloader or to the reset vector.  Refer to the UM0560 bootloader
+   user manual for more details. */
 
-#define OPT_IWDG_HW_MASK   (1 << 0) /* is independent watchdog activated by hardware */
-#define OPT_IWDG_HALT_MASK (1 << 1) /* independent window watchdog off on Halt/Active-halt */
-#define OPT_WWDG_HW_MASK   (1 << 2) /* is window watchdog activated by hardware  */
-#define OPT_WWDG_HALT_MASK (1 << 3) /* window window watchdog reset on Halt/Active-halt */
+/* is independent watchdog activated by hardware */
+#define OPT_IWDG_HW_MASK   (1 << 0)
+/* independent window watchdog off on Halt/Active-halt */
+#define OPT_IWDG_HALT_MASK (1 << 1)
+/* is window watchdog activated by hardware */
+#define OPT_WWDG_HW_MASK   (1 << 2)
+/* window window watchdog reset on Halt/Active-halt */
+#define OPT_WWDG_HALT_MASK (1 << 3)
 
-#define OPT_CLOCK_HSECNT_MASK (3 << 0) /* Number of HSE oscillator stabilization clock cycles: 1/16/512/4096 */
-#define OPT_CLOCK_LSECNT_MASK (3 << 2) /* Number of LSE oscillator stabilization clock cycles: 1/16/512/4096 */
+/* Number of HSE oscillator stabilization clock cycles: 1/16/512/4096 */
+#define OPT_CLOCK_HSECNT_MASK (3 << 0)
+/* Number of LSE oscillator stabilization clock cycles: 1/16/512/4096 */
+#define OPT_CLOCK_LSECNT_MASK (3 << 2)
 
 #define OPT_BOR_ON_MASK (1 << 0) /* is brownout reset on */
 #define OPT_BOR_TH_MASK (7 << 1) /* Brownout reset thresholds */
 
-#define UID_POINTER 0x004926	/* 96-bit unique device identifier which provides a reference number that is unique for any device and in any context.
-				   The 96 bits of the identifier can never be altered by the user. */
+/* UID: 96-bit unique device identifier which provides a reference number that
+   is unique for any device and in any context.
+   The 96 bits of the identifier can never be altered by the user. */
+#define UID_POINTER 0x004926
 
 #endif
