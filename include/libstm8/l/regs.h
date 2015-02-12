@@ -82,6 +82,9 @@
 /* IWDG register map */
 #include <libstm8/l/iwdg.h>
 
+/* WWDG register map */
+#include <libstm8/l/wwdg.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -100,9 +103,6 @@
 #define WFE_CR1 MMIO8(0x0050A6)	/* WFE control register 1 */
 #define WFE_CR2 MMIO8(0x0050A7)	/* WFE control register 2 */
 #define WFE_CR3 MMIO8(0x0050A8)	/* WFE control register 3 */
-
-#define WWDG_CR MMIO8(0x0050D3)	/* WWDG control register */
-#define WWDG_WR MMIO8(0x0050D4)	/* WWDR window register */
 
 #define RTC_TR1 MMIO8(0x005140)	/* Time register 1 */
 #define RTC_TR2 MMIO8(0x005141)	/* Time register 2 */
