@@ -91,6 +91,9 @@
 /* I2C register map */
 #include <libstm8/l/i2c.h>
 
+/* SPI register map */
+#include <libstm8/l/spi.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -138,15 +141,6 @@
 #define RTC_ALRMAR2 MMIO8(0x00515D)	/* Alarm A register 2 */
 #define RTC_ALRMAR3 MMIO8(0x00515E)	/* Alarm A register 3 */
 #define RTC_ALRMAR4 MMIO8(0x00515F)	/* Alarm A register 4 */
-
-#define SPI1_CR1    MMIO8(0x005200)	/* SPI1 control register 1 */
-#define SPI1_CR2    MMIO8(0x005201)	/* SPI1 control register 2 */
-#define SPI1_ICR    MMIO8(0x005202)	/* SPI1 interrupt control register */
-#define SPI1_SR     MMIO8(0x005203)	/* SPI1 status register */
-#define SPI1_DR     MMIO8(0x005204)	/* SPI1 data register */
-#define SPI1_CRCPR  MMIO8(0x005205)	/* SPI1 CRC polynomial register */
-#define SPI1_RXCRCR MMIO8(0x005206)	/* SPI1 Rx CRC register */
-#define SPI1_TXCRCR MMIO8(0x005207)	/* SPI1 Tx CRC register */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
