@@ -16,13 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef USART_H
 #define USART_H
 
 #include <libstm8/common.h>
 
-#define USART1 0x005230		    /* base adress */
+#define USART1	0x005230	/* base adress */
+#define USART2	0x0053E0	/* on high density devices */
+#define USART3	0x0053F0
 #define USART_SR(base)   MMIO8(base + 0x0)   /* USART1 status register */
 #define USART_DR(base)   MMIO8(base + 0x1)   /* USART1 data register */
 #define USART_BRR1(base) MMIO8(base + 0x2)   /* USART1 baud rate register 1 */
