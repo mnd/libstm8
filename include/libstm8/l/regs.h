@@ -73,6 +73,9 @@
 /* TIM 1 / TIM 2,3,5 / TIM 4 register map */
 #include <libstm8/l/tim.h>
 
+/* IRTIM register map */
+#include <libstm8/l/ir.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -154,8 +157,6 @@
 #define I2C1_CCRH   MMIO8(0x00521C)	/* I2C1 clock control register high */
 #define I2C1_TRISER MMIO8(0x00521D)	/* I2C1 TRISE register */
 #define I2C1_PECR   MMIO8(0x00521E)	/* I2C1 packet error checking register */
-
-#define IR_CR MMIO8(0x0052FF)	/* Infrared control register */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
