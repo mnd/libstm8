@@ -100,6 +100,9 @@
 /* EXTI register map */
 #include <libstm8/l/exti.h>
 
+/* WFE mode registers */
+#include <libstm8/l/wfe.h>
+
 /* General hardware register map */
 
 #define FLASH_CR1   MMIO8(0x005050)	/* Flash control register 1 */
@@ -107,10 +110,6 @@
 #define FLASH_PUKR  MMIO8(0x005052)	/* Flash program memory unprotection key register */
 #define FLASH_DUKR  MMIO8(0x005053)	/* Data EEPROM unprotection key register */
 #define FLASH_IAPSR MMIO8(0x005054)	/* Flash in-application programming status register */
-
-#define WFE_CR1 MMIO8(0x0050A6)	/* WFE control register 1 */
-#define WFE_CR2 MMIO8(0x0050A7)	/* WFE control register 2 */
-#define WFE_CR3 MMIO8(0x0050A8)	/* WFE control register 3 */
 
 #define RTC_TR1 MMIO8(0x005140)	/* Time register 1 */
 #define RTC_TR2 MMIO8(0x005141)	/* Time register 2 */
@@ -124,22 +123,22 @@
 #define RTC_CR2 MMIO8(0x005149)	/* Control register 2 */
 #define RTC_CR3 MMIO8(0x00514A)	/* Control register 3 */
 
-#define RTC_ISR1 MMIO8(0x00514C)	/* Initialization and status register 1 */
-#define RTC_ISR2 MMIO8(0x00514D)	/* Initialization and status register 2 */
+#define RTC_ISR1 MMIO8(0x00514C) /* Initialization and status register 1 */
+#define RTC_ISR2 MMIO8(0x00514D) /* Initialization and status register 2 */
 
 /* Next 5 registers are not impacted by a system reset. They are reset at power-on. */
-#define RTC_SPRERH MMIO8(0x005150)	/* Synchronous prescaler register high */
-#define RTC_SPRERL MMIO8(0x005151)	/* Synchronous prescaler register low */
-#define RTC_APRER  MMIO8(0x005152)	/* Asynchronous prescaler register */
-#define RTC_WUTRH  MMIO8(0x005154)	/* Wakeup timer register high */
-#define RTC_WUTRL  MMIO8(0x005155)	/* Wakeup timer register low */
+#define RTC_SPRERH MMIO8(0x005150) /* Synchronous prescaler register high */
+#define RTC_SPRERL MMIO8(0x005151) /* Synchronous prescaler register low */
+#define RTC_APRER  MMIO8(0x005152) /* Asynchronous prescaler register */
+#define RTC_WUTRH  MMIO8(0x005154) /* Wakeup timer register high */
+#define RTC_WUTRL  MMIO8(0x005155) /* Wakeup timer register low */
 
 #define RTC_WPR MMIO8(0x005159)	/* Write protection register */
 
-#define RTC_ALRMAR1 MMIO8(0x00515C)	/* Alarm A register 1 */
-#define RTC_ALRMAR2 MMIO8(0x00515D)	/* Alarm A register 2 */
-#define RTC_ALRMAR3 MMIO8(0x00515E)	/* Alarm A register 3 */
-#define RTC_ALRMAR4 MMIO8(0x00515F)	/* Alarm A register 4 */
+#define RTC_ALRMAR1 MMIO8(0x00515C) /* Alarm A register 1 */
+#define RTC_ALRMAR2 MMIO8(0x00515D) /* Alarm A register 2 */
+#define RTC_ALRMAR3 MMIO8(0x00515E) /* Alarm A register 3 */
+#define RTC_ALRMAR4 MMIO8(0x00515F) /* Alarm A register 4 */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
@@ -158,26 +157,26 @@
 
 #define CFG_GCR MMIO8(0x007F60)	/* Global configuration register */
 
-#define SWIM_CSR MMIO8(0x007F80)	/* SWIM control status register */
+#define SWIM_CSR MMIO8(0x007F80) /* SWIM control status register */
 
-#define DM_BK1RE  MMIO8(0x007F90)	/* DM breakpoint 1 register extended byte */
-#define DM_BK1RH  MMIO8(0x007F91)	/* DM breakpoint 1 register high byte */
-#define DM_BK1RL  MMIO8(0x007F92)	/* DM breakpoint 1 register low byte */
-#define DM_BK2RE  MMIO8(0x007F93)	/* DM breakpoint 2 register extended byte */
-#define DM_BK2RH  MMIO8(0x007F94)	/* DM breakpoint 2 register high byte */
-#define DM_BK2RL  MMIO8(0x007F95)	/* DM breakpoint 2 register low byte */
-#define DM_CR1    MMIO8(0x007F96)	/* DM Debug module control register 1 */
-#define DM_CR2    MMIO8(0x007F97)	/* DM Debug module control register 2 */
-#define DM_CSR1   MMIO8(0x007F98)	/* DM Debug module control/status register 1 */
-#define DM_CSR2   MMIO8(0x007F99)	/* DM Debug module control/status register 2 */
-#define DM_ENFCTR MMIO8(0x007F9A)	/* DM enable function register */
+#define DM_BK1RE  MMIO8(0x007F90) /* DM breakpoint 1 register extended byte */
+#define DM_BK1RH  MMIO8(0x007F91) /* DM breakpoint 1 register high byte */
+#define DM_BK1RL  MMIO8(0x007F92) /* DM breakpoint 1 register low byte */
+#define DM_BK2RE  MMIO8(0x007F93) /* DM breakpoint 2 register extended byte */
+#define DM_BK2RH  MMIO8(0x007F94) /* DM breakpoint 2 register high byte */
+#define DM_BK2RL  MMIO8(0x007F95) /* DM breakpoint 2 register low byte */
+#define DM_CR1    MMIO8(0x007F96) /* DM Debug module control register 1 */
+#define DM_CR2    MMIO8(0x007F97) /* DM Debug module control register 2 */
+#define DM_CSR1   MMIO8(0x007F98) /* DM Debug module control/status register 1 */
+#define DM_CSR2   MMIO8(0x007F99) /* DM Debug module control/status register 2 */
+#define DM_ENFCTR MMIO8(0x007F9A) /* DM enable function register */
 
-#define OPT_ROP   MMIO8(0x004800)	/* Memory readout protection (ROP). 0xAA: Disable readout protection (write access via SWIM protocol) */
-#define OPT_UBC   MMIO8(0x004802)	/* Size of the user boot code area. */
-#define OPT_WDG   MMIO8(0x004808)	/* Independent watchdog option */
-#define OPT_CLOCK MMIO8(0x004809)	/* Number of stabilization clock cycles for HSE and LSE oscillators */
-#define OPT_BOR   MMIO8(0x00480A)	/* Brownout reset */
-#define OPT_BL    MMIO16(0x00480B)	/* Bootloader option 2 bytes */
+#define OPT_ROP   MMIO8(0x004800) /* Memory readout protection (ROP). 0xAA: Disable readout protection (write access via SWIM protocol) */
+#define OPT_UBC   MMIO8(0x004802) /* Size of the user boot code area. */
+#define OPT_WDG   MMIO8(0x004808) /* Independent watchdog option */
+#define OPT_CLOCK MMIO8(0x004809) /* Number of stabilization clock cycles for HSE and LSE oscillators */
+#define OPT_BOR   MMIO8(0x00480A) /* Brownout reset */
+#define OPT_BL    MMIO16(0x00480B) /* Bootloader option 2 bytes */
 /* option OPT_BL is checked by the boot ROM code after reset. Depending on content
 of addresses 00 480B, 00 480C and 0x8000 (reset vector) the CPU jumps to the
 bootloader or to the reset vector.  Refer to the UM0560 bootloader user manual
