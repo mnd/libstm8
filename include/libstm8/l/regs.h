@@ -34,6 +34,8 @@
    The 2 MSB have a fixed value: 0x3.
 */
 
+/* General hardware register map */
+
 /* I/O port hardware register map */
 #include <libstm8/l/gpio.h>
 
@@ -79,6 +81,9 @@
 /* BEEP register map */
 #include <libstm8/l/beep.h>
 
+/* RTC register map */
+#include <libstm8/l/rtc.h>
+
 /* IWDG register map */
 #include <libstm8/l/iwdg.h>
 
@@ -105,37 +110,6 @@
 
 /* FLASH register map */
 #include <libstm8/l/flash.h>
-
-/* General hardware register map */
-
-#define RTC_TR1 MMIO8(0x005140)	/* Time register 1 */
-#define RTC_TR2 MMIO8(0x005141)	/* Time register 2 */
-#define RTC_TR3 MMIO8(0x005142)	/* Time register 3 */
-
-#define RTC_DR1 MMIO8(0x005144)	/* Date register 1 */
-#define RTC_DR2 MMIO8(0x005145)	/* Date register 2 */
-#define RTC_DR3 MMIO8(0x005146)	/* Date register 3 */
-
-#define RTC_CR1 MMIO8(0x005148)	/* Control register 1 */
-#define RTC_CR2 MMIO8(0x005149)	/* Control register 2 */
-#define RTC_CR3 MMIO8(0x00514A)	/* Control register 3 */
-
-#define RTC_ISR1 MMIO8(0x00514C) /* Initialization and status register 1 */
-#define RTC_ISR2 MMIO8(0x00514D) /* Initialization and status register 2 */
-
-/* Next 5 registers are not impacted by a system reset. They are reset at power-on. */
-#define RTC_SPRERH MMIO8(0x005150) /* Synchronous prescaler register high */
-#define RTC_SPRERL MMIO8(0x005151) /* Synchronous prescaler register low */
-#define RTC_APRER  MMIO8(0x005152) /* Asynchronous prescaler register */
-#define RTC_WUTRH  MMIO8(0x005154) /* Wakeup timer register high */
-#define RTC_WUTRL  MMIO8(0x005155) /* Wakeup timer register low */
-
-#define RTC_WPR MMIO8(0x005159)	/* Write protection register */
-
-#define RTC_ALRMAR1 MMIO8(0x00515C) /* Alarm A register 1 */
-#define RTC_ALRMAR2 MMIO8(0x00515D) /* Alarm A register 2 */
-#define RTC_ALRMAR3 MMIO8(0x00515E) /* Alarm A register 3 */
-#define RTC_ALRMAR4 MMIO8(0x00515F) /* Alarm A register 4 */
 
 /* CPU/SWIM/debug module/interrupt controller registers */
 
