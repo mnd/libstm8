@@ -714,48 +714,71 @@
    1: Capture enabled
 */
 #define TIM_CCER1_CC1E	(1 << 0) /*  */
-/*
-|------------------------+------------------------------------------------------------|
-|Control bits            | Output states                                              |
-|---+----+----+----+-----+----------------------------+-------------------------------|
-|MOE|OSSI|OSSR|CCiE|CCiNE| OCi                        | OCiN                          |
-|---+----+----+----+-----+----------------------------+-------------------------------|
-| 1 | x  |  0 |  0 |  0  | Output disabled            | Output disabled               |
-|   |    |    |    |     | (not driven by the timer)  | (not driven by the timer)     |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  0 |  0 |  1  | Output disabled            | OCiREF + polarity OCiN =      |
-|   |    |    |    |     | (not driven by the timer)  | OCiREF xor CCiNP              |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  0 |  1 |  0  | OCiREF + polarity OCi =    | Output disabled               |
-|   |    |    |    |     | OCiREF xor CCiP            | (not driven by the timer)     |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  0 |  1 |  1  | OCiREF + polarity +        | Complementary to OCiREF       |
-|   |    |    |    |     | deadtime                   | (not OCiREF) + polarity +     |
-|   |    |    |    |     |                            | deadtime                      |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  1 |  0 |  0  | Output disabled            | Output disabled               |
-|   |    |    |    |     | (not driven by the timer)  | (not driven by the timer)     |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  1 |  0 |  1  | Off state                  | OCiREF + polarity OCiN =      |
-|   |    |    |    |     | (output enabled with       | OCiREF xor CCiNP              |
-|   |    |    |    |     | inactive state) OCi = CCiP |                               |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  1 |  1 |  0  | OCiREF + polarity OCi =    | Off state                     |
-|   |    |    |    |     | OCiREF xor CCiP            | (output enabled with inactive |
-|   |    |    |    |     |                            | state) OCiN = CCiNP           |
-|   |    |----+----+-----+----------------------------+-------------------------------|
-|   |    |  1 |  1 |  1  | OCiREF + polarity +        | Complementary to OCiREF       |
-|   |    |    |    |     | deadtime                   | (not OCiREF) + polarity +     |
-|   |    |    |    |     |                            | deadtime                      |
-|---+----+----+----+-----+----------------------------+-------------------------------|
-| 0 | 0  |  x |  x |  x  | Output disabled (not driven by the timer)                  |
-|   |----+----+----+-----+-------------------------------+----------------------------|
-|   | 1  |  x |  x |  x  | Off state (output enabled with inactive state)             |
-|   |    |    |    |     | Asynchronously: OCi = CCiP and OCiN = CCiNP                |
-|   |    |    |    |     | Then if the clock is present: OCi = OISi and OCiN = OISiN  |
-|   |    |    |    |     | after a deadtime, assuming that OISi and OISiN do not      |
-|   |    |    |    |     | correspond with OCi and OCiN in active state               |
-|---+----+----+----+-----+-------------------------------+----------------------------|
+/* TIM1
+|------------------------+-------------------------------------------------------|
+|Control bits            |Output states                                          |
+|---+----+----+----+-----+-------------------------+-----------------------------|
+|MOE|OSSI|OSSR|CCiE|CCiNE|OCi                      |OCiN                         |
+|---+----+----+----+-----+-------------------------+-----------------------------|
+| 1 | x  |  0 |  0 |  0  |Output disabled          |Output disabled              |
+|   |    |    |    |     |(not driven by the timer)|(not driven by the timer)    |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  0 |  0 |  1  |Output disabled          |OCiREF + polarity OCiN =     |
+|   |    |    |    |     |(not driven by the timer)|OCiREF xor CCiNP             |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  0 |  1 |  0  |OCiREF + polarity OCi =  |Output disabled              |
+|   |    |    |    |     |OCiREF xor CCiP          |(not driven by the timer)    |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  0 |  1 |  1  |OCiREF + polarity +      |Complementary to OCiREF      |
+|   |    |    |    |     |deadtime                 |(not OCiREF) + polarity +    |
+|   |    |    |    |     |                         |deadtime                     |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  1 |  0 |  0  |Output disabled          |Output disabled              |
+|   |    |    |    |     |(not driven by the timer)|(not driven by the timer)    |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  1 |  0 |  1  |Off state                |OCiREF + polarity OCiN =     |
+|   |    |    |    |     |(output enabled with     |OCiREF xor CCiNP             |
+|   |    |    |    |     |inactive state) OCi=CCiP |                             |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  1 |  1 |  0  |OCiREF + polarity OCi =  |Off state                    |
+|   |    |    |    |     |OCiREF xor CCiP          |(output enabled with inactive|
+|   |    |    |    |     |                         |state) OCiN = CCiNP          |
+|   |    |----+----+-----+-------------------------+-----------------------------|
+|   |    |  1 |  1 |  1  |OCiREF + polarity +      |Complementary to OCiREF      |
+|   |    |    |    |     |deadtime                 |(not OCiREF) + polarity +    |
+|   |    |    |    |     |                         |deadtime                     |
+|---+----+----+----+-----+-------------------------+-----------------------------|
+| 0 | 0  |  x |  x |  x  |Output disabled (not driven by the timer)              |
+|   |----+----+----+-----+-------------------------------------------------------|
+|   | 1  |  x |  x |  x  |Off state (output enabled with inactive state)         |
+|   |    |    |    |     |Asynchronously: OCi = CCiP and OCiN = CCiNP            |
+|   |    |    |    |     |Then if the clock is present: OCi=OISi and OCiN=OISiN  |
+|   |    |    |    |     |after a deadtime, assuming that OISi and OISiN do not  |
+|   |    |    |    |     |correspond with OCi and OCiN in active state           |
+|---+----+----+----+-----+-------------------------------------------------------|
+
+TIM2,3,5
+|-------------+------------------------------------------------------------|
+|Control bits |                                                            |
+|---+----+----| OCi/OCi_EN output state                                    |
+|MOE|OSSI|CCiE|                                                            |
+|---+----+----+------------------------------------------------------------|
+| 1 | x  |  0 | Output disabled (not driven by the timer)                  |
+|   |    |    | OCi = CCiP, OCi_EN = 0                                     |
+|   |    +----+------------------------------------------------------------|
+|   |    |  1 | OCi = OCiREF + polarity (OCiREF xor CCiP)                  |
+|   |    |    | OCi_EN = 1                                                 |
+|---+----+----+------------------------------------------------------------|
+| 0 | 0  |  0 |                                                            |
+|   |----+----| Output disabled (not driven by the timer)                  |
+|   | 0  |  1 | OCi = OISi, OCi_EN = 0                                     |
+|   |----+----|                                                            |
+|   | 1  |  0 |                                                            |
+|   |----+----+------------------------------------------------------------|
+|   | 1  |  1 | Off state (output enabled with inactive state)             |
+|   |    |    | OCi = OISi, OCx_EN = 1                                     |
+|---+----+----+------------------------------------------------------------|
+
 */
 
 /* same description as before */
@@ -843,5 +866,58 @@
 */
 #define TIM_BKR_LOCK_3		0x3
 
+/* This bitfield defines the duration of the deadtime inserted between the
+complementary outputs. DT corresponds to this duration. t CK_PSC is the TIM
+clock pulse.
+*/
+/* DTG[7:5] = 0xx => DT = DTG[7:0] x t_dtg with t_dtg = t_CK_PSC (f1) */
+#define TIM_DTR_DTG_1(dtg)	(0x7F & (dtg))		/* b0xxx_xxxx */
+/* DTG[7:5] = 10x => DT = (64 + DTG[5:0]) x t_dtg with t_dtg = 2 x t_CK_PSC (f2) */
+#define TIM_DTR_DTG_2(dtg)	((0x3F & (dtg)) | 0x80) /* b10xx_xxxx */
+/* DTG[7:5] = 110 => DT = (32 + DTG[4:0]) x t_dtg with t_dtg = 8 x t_CK_PSC (f3) */
+#define TIM_DTR_DTG_3(dtg)	((0x1F & (dtg)) | 0xC0) /* b110x_xxxx */
+/* DTG[7:5] = 111 => DT = (32 + DTG[4:0]) x t_dtg with t_dtg =16 x t_CK_PSC (f4) */
+#define TIM_DTR_DTG_4(dtg)	((0x1F & (dtg)) | 0xE0) /* b111x_xxxx */
+
+#define TIM_OISR_OIS3N	(1 << 5)
+#define TIM_OISR_OIS3	(1 << 4)
+#define TIM_OISR_OIS2N	(1 << 3)
+#define TIM_OISR_OIS2	(1 << 2)
+#define TIM_OISR_OIS1N	(1 << 1) /* OC1N = OIS1N after a deadtime when MOE = 0 */
+/* OC1=OIS1 (after a deadtime if OC1N is implemented) when MOE=0 */
+#define TIM_OISR_OIS1	(1 << 0)
+
+/* DMA base address
+   This 5-bit vector defines the base-address for DMA transfers in burst mode
+   (when read/write access is made through the TIM1_DMAR address). DBA is
+   defined as an offset starting from the address of the TIM1_CR1 register.
+
+   00000: TIM1_CR1
+   00001: TIM1_CR2
+   ...
+*/
+#define TIM_DCR1_DBA_SHIFT	0
+#define TIM_DCR1_DBA_MASK	0x1F
+
+/* DMA burst length
+   This 5-bit vector defines the length of DMA transfers in burst mode by
+   setting the number of registers to be accessed.
+
+   00000: 1 register
+   00001: 2 registers
+   ....
+   11111: 32 registers
+*/
+#define TIM_DCR2_DBL_SHIFT	0
+#define TIM_DCR2_DBL_MASK	0x1F
+#define TIM_DCR2_DBL(n)		((n) - 1) /* length in bytes */
+
+/* TIM_DMAR == DMAB[7:0] DMA register for burst accesses.
+   A read or write access to the TIM_DMAR register accesses the register
+   located at the address: “(TIM_CR1 address) + DBA + (DMA index)” in which:
+   ● TIM1_CR1 is the address of control register 1
+   ● DBA is the DMA base address configured in the TIM_DCR1 register
+   ● DMA index is the offset automatically controlled by the DMA transfer
+*/
 
 #endif
