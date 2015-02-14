@@ -111,22 +111,16 @@
 /* FLASH register map */
 #include <libstm8/l/flash.h>
 
+/* GCR register */
+#include <libstm8/l/gcr.h>
+
 /* CPU/SWIM/debug module/interrupt controller registers */
 
-/* CPU_* accessible only in debug mode */
-#define CPU_A   MMIO8(0x007F00)	/* Accumulator */
-#define CPU_PCE MMIO8(0x007F01)	/* Program counter extended */
-#define CPU_PCH MMIO8(0x007F02)	/* Program counter high */
-#define CPU_PCL MMIO8(0x007F03)	/* Program counter low */
-#define CPU_XH  MMIO8(0x007F04)	/* X index register high */
-#define CPU_XL  MMIO8(0x007F05)	/* X index register low */
-#define CPU_YH  MMIO8(0x007F06)	/* Y index register high */
-#define CPU_YL  MMIO8(0x007F07)	/* Y index register low */
-#define CPU_SPH MMIO8(0x007F08)	/* Stack pointer high */
-#define CPU_SPL MMIO8(0x007F09)	/* Stack pointer low */
-#define CPU_CCR MMIO8(0x007F0A)	/* Condition code register */
+/* CPU register map */
+#include <libstm8/l/cpu.h>
 
-#define CFG_GCR MMIO8(0x007F60)	/* Global configuration register */
+/* Refer to the STM8 SWIM communication Protocol and Debug Module User Manual
+   for a description of the SWIM and Debug module (DM) registers. */
 
 #define SWIM_CSR MMIO8(0x007F80) /* SWIM control status register */
 
@@ -142,6 +136,10 @@
 #define DM_CSR2   MMIO8(0x007F99) /* DM Debug module control/status register 2 */
 #define DM_ENFCTR MMIO8(0x007F9A) /* DM enable function register */
 
+/* Refer to the option byte section in the datasheet for more information on
+   option bytes, and to the STM8 SWIM protocol and debug module user manual
+   (UM0470) for details on how to program them. */
+
 /* Memory readout protection (ROP).
    0xAA: Disable readout protection (write access via SWIM protocol) */
 #define OPT_ROP   MMIO8(0x004800)
@@ -152,9 +150,9 @@
 #define OPT_BOR   MMIO8(0x00480A) /* Brownout reset */
 #define OPT_BL    MMIO16(0x00480B) /* Bootloader option 2 bytes */
 /* option OPT_BL is checked by the boot ROM code after reset. Depending on
-   content of addresses 00 480B, 00 480C and 0x8000 (reset vector) the CPU jumps
-   to the bootloader or to the reset vector.  Refer to the UM0560 bootloader
-   user manual for more details. */
+   content of addresses 0x00480B, 0x00480C and 0x8000 (reset vector) the CPU
+   jumps to the bootloader or to the reset vector.  Refer to the UM0560
+   bootloader user manual for more details. */
 
 /* is independent watchdog activated by hardware */
 #define OPT_IWDG_HW_MASK   (1 << 0)
