@@ -28,13 +28,13 @@ gpio_setup ()
   /* GPIOC_CR1 = GPIO_C1(7, GPIO_CR1_PP); */
 
   gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_CR1_PP, GPIO_CR2_2, GPIO7);
-  gpio_mode_setup (GPIOE, GPIO_MODE_OUTPUT, GPIO_CR1_PP, GPIO_CR2_2, GPIO7);
+  gpio_mode_setup (GPIOC, GPIO_MODE_OUTPUT, GPIO_CR1_PP, GPIO_CR2_2, GPIO7);
 }
 
 int
 main ()
 {
-  int d;
+  uint16_t d = 0;
 
   gpio_setup ();
 
@@ -43,7 +43,6 @@ main ()
     {
       GPIOE_ODR ^= GPIO7;
       GPIOC_ODR ^= GPIO7;
-      d = 60000;
       do {} while (--d);
     }
 }

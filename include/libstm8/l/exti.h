@@ -37,7 +37,7 @@
 /* External interrupt port select register 1 */
 #define EXTI_CONF1 MMIO8(EXTI_BASE + 0x5)
 /* External interrupt port select register 2 */
-#define EXTI_CONF1 MMIO8(EXTI_BASE + 0xB)
+#define EXTI_CONF2 MMIO8(EXTI_BASE + 0xB)
 
 /* Portx bit `n' external interrupt sensitivity bits. This bits define the
    sensitivity of bit `n' of Port A, B, C, D and/or E external interrupts.
