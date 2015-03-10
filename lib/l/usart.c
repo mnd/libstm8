@@ -99,3 +99,22 @@ usart_send_blocking (uint16_t usart, uint8_t byte)
   usart_wait_send_ready (usart);
   usart_send (usart, byte);
 }
+
+void
+usart_wait_recv_ready (uint16_t usart)
+{
+  do { } while (!(USART_SR(usart) & USART_SR_RXNE));
+}
+
+uint8_t
+usart_recv (uint16_t usart)
+{
+  return USART_DR(usart);
+}
+
+uint8_t
+usart_recv_blocking(uint16_t usart)
+{
+  usart_wait_recv_ready (usart);
+  return usart_recv (usart);
+}

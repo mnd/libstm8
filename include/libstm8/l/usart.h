@@ -145,4 +145,7 @@ void usart_enable_mode (uint16_t usart, enum usart_mode mode);
 void usart_wait_send_ready (uint16_t usart);
 void usart_send (uint16_t usart, uint8_t byte);
 void usart_send_blocking (uint16_t usart, uint8_t byte);
+void usart_wait_recv_ready (uint16_t usart);
+uint8_t usart_recv (uint16_t usart);
+uint8_t usart_recv_blocking (uint16_t usart);
 #endif
