@@ -115,29 +115,29 @@
 #define TIM3_OISR  MMIO8(TIM3_BASE + 0x16)
 
 #define TIM5_BASE  0x005300
-#define TIM5_CR1   MMIO8(TIM3_BASE + 0x0)
-#define TIM5_CR2   MMIO8(TIM3_BASE + 0x1)
-#define TIM5_SMCR  MMIO8(TIM3_BASE + 0x2)
-#define TIM5_ETR   MMIO8(TIM3_BASE + 0x3)
-#define TIM5_DER   MMIO8(TIM3_BASE + 0x4)
-#define TIM5_IER   MMIO8(TIM3_BASE + 0x5)
-#define TIM5_SR1   MMIO8(TIM3_BASE + 0x6)
-#define TIM5_SR2   MMIO8(TIM3_BASE + 0x7)
-#define TIM5_EGR   MMIO8(TIM3_BASE + 0x8)
-#define TIM5_CCMR1 MMIO8(TIM3_BASE + 0x9)
-#define TIM5_CCMR2 MMIO8(TIM3_BASE + 0xA)
-#define TIM5_CCER1 MMIO8(TIM3_BASE + 0xB)
-#define TIM5_CNTRH MMIO8(TIM3_BASE + 0xC)
-#define TIM5_CNTRL MMIO8(TIM3_BASE + 0xD)
-#define TIM5_PSCR  MMIO8(TIM3_BASE + 0xE)
-#define TIM5_ARRH  MMIO8(TIM3_BASE + 0xF)
-#define TIM5_ARRL  MMIO8(TIM3_BASE + 0x10)
-#define TIM5_CCR1H MMIO8(TIM3_BASE + 0x11)
-#define TIM5_CCR1L MMIO8(TIM3_BASE + 0x12)
-#define TIM5_CCR2H MMIO8(TIM3_BASE + 0x13)
-#define TIM5_CCR2L MMIO8(TIM3_BASE + 0x14)
-#define TIM5_BKR   MMIO8(TIM3_BASE + 0x15)
-#define TIM5_OISR  MMIO8(TIM3_BASE + 0x16)
+#define TIM5_CR1   MMIO8(TIM5_BASE + 0x0)
+#define TIM5_CR2   MMIO8(TIM5_BASE + 0x1)
+#define TIM5_SMCR  MMIO8(TIM5_BASE + 0x2)
+#define TIM5_ETR   MMIO8(TIM5_BASE + 0x3)
+#define TIM5_DER   MMIO8(TIM5_BASE + 0x4)
+#define TIM5_IER   MMIO8(TIM5_BASE + 0x5)
+#define TIM5_SR1   MMIO8(TIM5_BASE + 0x6)
+#define TIM5_SR2   MMIO8(TIM5_BASE + 0x7)
+#define TIM5_EGR   MMIO8(TIM5_BASE + 0x8)
+#define TIM5_CCMR1 MMIO8(TIM5_BASE + 0x9)
+#define TIM5_CCMR2 MMIO8(TIM5_BASE + 0xA)
+#define TIM5_CCER1 MMIO8(TIM5_BASE + 0xB)
+#define TIM5_CNTRH MMIO8(TIM5_BASE + 0xC)
+#define TIM5_CNTRL MMIO8(TIM5_BASE + 0xD)
+#define TIM5_PSCR  MMIO8(TIM5_BASE + 0xE)
+#define TIM5_ARRH  MMIO8(TIM5_BASE + 0xF)
+#define TIM5_ARRL  MMIO8(TIM5_BASE + 0x10)
+#define TIM5_CCR1H MMIO8(TIM5_BASE + 0x11)
+#define TIM5_CCR1L MMIO8(TIM5_BASE + 0x12)
+#define TIM5_CCR2H MMIO8(TIM5_BASE + 0x13)
+#define TIM5_CCR2L MMIO8(TIM5_BASE + 0x14)
+#define TIM5_BKR   MMIO8(TIM5_BASE + 0x15)
+#define TIM5_OISR  MMIO8(TIM5_BASE + 0x16)
 
 
 /* 8-bit basic timer TIM4 */
@@ -152,6 +152,35 @@
 #define TIM4_CNTR  MMIO8(TIM4_BASE + 0x7)
 #define TIM4_PSCR  MMIO8(TIM4_BASE + 0x8)
 #define TIM4_ARR   MMIO8(TIM4_BASE + 0x9)
+
+
+/* Next definitions fully correct only for TIM2,3,5 timers, but if you need only
+   CR1 and CR2 registers then it can be used for other timers.
+*/
+
+#define TIM_CR1(base)   MMIO8(base + 0x0)
+#define TIM_CR2(base)   MMIO8(base + 0x1)
+#define TIM_SMCR(base)  MMIO8(base + 0x2)
+#define TIM_ETR(base)   MMIO8(base + 0x3)
+#define TIM_DER(base)   MMIO8(base + 0x4)
+#define TIM_IER(base)   MMIO8(base + 0x5)
+#define TIM_SR1(base)   MMIO8(base + 0x6)
+#define TIM_SR2(base)   MMIO8(base + 0x7)
+#define TIM_EGR(base)   MMIO8(base + 0x8)
+#define TIM_CCMR1(base) MMIO8(base + 0x9)
+#define TIM_CCMR2(base) MMIO8(base + 0xA)
+#define TIM_CCER1(base) MMIO8(base + 0xB)
+#define TIM_CNTRH(base) MMIO8(base + 0xC)
+#define TIM_CNTRL(base) MMIO8(base + 0xD)
+#define TIM_PSCR(base)  MMIO8(base + 0xE)
+#define TIM_ARRH(base)  MMIO8(base + 0xF)
+#define TIM_ARRL(base)  MMIO8(base + 0x10)
+#define TIM_CCR1H(base) MMIO8(base + 0x11)
+#define TIM_CCR1L(base) MMIO8(base + 0x12)
+#define TIM_CCR2H(base) MMIO8(base + 0x13)
+#define TIM_CCR2L(base) MMIO8(base + 0x14)
+#define TIM_BKR(base)   MMIO8(base + 0x15)
+#define TIM_OISR(base)  MMIO8(base + 0x16)
 
 
 /* is TIM1_ARR register buffered through a preload register */
@@ -944,5 +973,50 @@ clock pulse.
    ● DBA is the DMA base address configured in the TIM_DCR1 register
    ● DMA index is the offset automatically controlled by the DMA transfer
 */
+
+enum tim_alignment {
+  TIM_CMS_EDGE = TIM_CR1_CMS_EA << TIM_CR1_CMS_SHIFT,
+  TIM_CMS_CENTER_1 = TIM_CR1_CMS_CA1 << TIM_CR1_CMS_SHIFT,
+  TIM_CMS_CENTER_2 = TIM_CR1_CMS_CA2 << TIM_CR1_CMS_SHIFT,
+  TIM_CMS_CENTER_3 = TIM_CR1_CMS_CA3 << TIM_CR1_CMS_SHIFT
+};
+
+enum tim_direction {
+  TIM_DIR_UP = 0,
+  TIM_DIR_DOWN = TIM_CR1_DIR
+};
+
+enum tim_oc_id {
+  TIM_OC1 = 0x0,
+  TIM_OC1N = 0x1,
+  TIM_OC2 = 0x2,
+  TIM_OC2N = 0x3,
+  TIM_OC3 = 0x4,
+  TIM_OC3N = 0x5,
+  TIM_OC4 = 0x6
+};
+
+enum tim_oc_mode {
+  TIM_OCM_FROZEN = TIM_CCMR1_OC1M_FROZEN << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_ACTIVE = TIM_CCMR1_OC1M_MATCH_ACTIVE << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_INACTIVE = TIM_CCMR1_OC1M_MATCH_INACTIVE << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_TOGGLE = TIM_CCMR1_OC1M_TOGGLE << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_FORCE_LOW = TIM_CCMR1_OC1M_FORCE_INACTIVE << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_FORCE_HIGH = TIM_CCMR1_OC1M_FORCE_ACTIVE << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_PWM_1 = TIM_CCMR1_OC1M_PWM_1 << TIM_CCMR1_OC1M_SHIFT,
+  TIM_OCM_PWM_2 = TIM_CCMR1_OC1M_PWM_2 << TIM_CCMR1_OC1M_SHIFT
+};
+
+void timer_set_mode (uint16_t timer_peripheral, enum tim_alignment alignment,
+		     enum tim_direction direction);
+void timer_set_prescaler (uint16_t timer_peripheral, uint16_t value);
+void timer_set_period (uint16_t timer_peripheral, uint16_t period);
+void timer_set_repetition_counter (uint16_t timer_peripheral, uint8_t value);
+void timer_enable_preload (uint16_t timer_peripheral);
+void timer_disable_preload (uint16_t timer_peripheral);
+void timer_set_oc_mode (uint16_t timer_peripheral, enum tim_oc_id oc_id,
+			enum tim_oc_mode oc_mode);
+void timer_enable_oc_preload (uint32_t timer_peripheral, enum tim_oc_id oc_id);
+void timer_disable_oc_preload (uint32_t timer_peripheral, enum tim_oc_id oc_id);
 
 #endif

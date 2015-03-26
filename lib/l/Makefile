@@ -1,7 +1,7 @@
 CC=sdcc
 LD=sdld
 CFLAGS += -I../../include
-OBJECTS = gpio.rel clk.rel usart.rel lcd.rel adc.rel
+OBJECTS = gpio.rel clk.rel usart.rel lcd.rel adc.rel tim.rel
 
 .PHNOY: all clean
 
