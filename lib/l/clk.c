@@ -26,25 +26,31 @@ clk_periph_clock_enable (enum clk_periph_clken clock)
 }
 
 void
+clk_periph_clock_disable (enum clk_periph_clken clock)
+{
+  MMIO8(CLK_BASE + (clock >> 3)) &= ~(1 << (clock & 0x7));
+}
+
+void
 clk_rtc_select_clock (uint8_t clock)
 {
   uint8_t crtcr = CLK_CRTCR;
   do {} while (CLK_CRTCR & CLK_CRTC_SWBSY);
 
-  switch (clock)
-    {
-    case CLK_CRTC_SEL_HSE:	/* TODO: set divider to get 1MHz */
-    case CLK_CRTC_SEL_HSI:	/* set divider to get 1MHz */
-      crtcr &= ~(CLK_CRTC_DIV_MASK << CLK_CRTC_DIV_SHIFT);
-      crtcr |= CLK_CRTC_DIV_16 << CLK_CRTC_DIV_SHIFT;
-      break;
-    default:
-      crtcr &= ~(CLK_CRTC_DIV_MASK << CLK_CRTC_DIV_SHIFT);
-      break;
-    }
-
   crtcr &= ~(CLK_CRTC_SEL_MASK << CLK_CRTC_SEL_SHIFT);
   crtcr |= clock << CLK_CRTC_SEL_SHIFT;
+
+  CLK_CRTCR = crtcr;
+}
+
+void
+clk_rtc_set_prescaler (uint8_t prescaler)
+{
+  uint8_t crtcr = CLK_CRTCR;
+  do {} while (CLK_CRTCR & CLK_CRTC_SWBSY);
+
+  crtcr &= ~(CLK_CRTC_DIV_MASK << CLK_CRTC_DIV_SHIFT);
+  crtcr |= prescaler << CLK_CRTC_DIV_SHIFT;
 
   CLK_CRTCR = crtcr;
 }

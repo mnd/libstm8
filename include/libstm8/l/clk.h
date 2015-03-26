@@ -237,8 +237,10 @@ enum clk_periph_clken {
 };
 
 void clk_periph_clock_enable (enum clk_periph_clken clock);
+void clk_periph_clock_disable (enum clk_periph_clken clock);
 /* maximum allowed RTC rate is 1MHz, so we would set appropriate divide for HSI */
 void clk_rtc_select_clock (uint8_t clock);
+void clk_rtc_set_prescaler (uint8_t prescaler);
 
 
 #endif

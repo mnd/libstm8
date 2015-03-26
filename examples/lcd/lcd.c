@@ -37,7 +37,9 @@ lcd_init (void)
   
   clk_periph_clock_enable (CLK_RTC);
   clk_periph_clock_enable (CLK_LCD);
+  /* Set 1MHz clock */
   clk_rtc_select_clock (CLK_CRTC_SEL_HSI);
+  clk_rtc_set_prescaler (CLK_CRTC_DIV_16);
 
  /* enable all 24 segments. Now correspondend pins can't be used as GPIO */
   lcd_enable_segments (0xFFFFFFL); /* disable segment 23 -- PC */
