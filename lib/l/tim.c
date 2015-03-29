@@ -228,3 +228,211 @@ timer_disable_oc_preload (uint32_t timer_peripheral, enum tim_oc_id oc_id)
 	}
     }
 }
+
+void
+timer_set_oc_value (uint16_t timer_peripheral, enum tim_oc_id oc_id,
+		    uint16_t value)
+{
+  if (timer_peripheral == TIM4_BASE)
+    {
+      return;
+    }
+  else if (timer_peripheral == TIM1_BASE)
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	case TIM_OC1N:
+	  TIM1_CCR1H = (uint8_t) (value >> 8);
+	  TIM1_CCR1L = (uint8_t) (value & 0xFF);
+	  break;
+	case TIM_OC2:
+	case TIM_OC2N:
+	  TIM1_CCR2H = (uint8_t) (value >> 8);
+	  TIM1_CCR2L = (uint8_t) (value & 0xFF);
+	  break;
+	case TIM_OC3:
+	case TIM_OC3N:
+	  TIM1_CCR3H = (uint8_t) (value >> 8);
+	  TIM1_CCR3L = (uint8_t) (value & 0xFF);
+	  break;
+	case TIM_OC4:
+	  TIM1_CCR4H = (uint8_t) (value >> 8);
+	  TIM1_CCR4L = (uint8_t) (value & 0xFF);
+	  break;
+	}
+    }
+  else			/* TIM2,3,5 */
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	case TIM_OC1N:
+	  TIM_CCR1H(timer_peripheral) = (uint8_t) (value >> 8);
+	  TIM_CCR1L(timer_peripheral) = (uint8_t) (value & 0xFF);
+	  break;
+	case TIM_OC2:
+	case TIM_OC2N:
+	  TIM_CCR2H(timer_peripheral) = (uint8_t) (value >> 8);
+	  TIM_CCR2L(timer_peripheral) = (uint8_t) (value & 0xFF);
+	  break;
+	}
+    }
+}
+
+/* TODO: Probably I must fix `enum tim_oc_id' to save offset in CCER1:CCER2
+   16 bits register.
+*/
+void
+timer_enable_oc_output (uint16_t timer_peripheral, enum tim_oc_id oc_id)
+{
+  if (timer_peripheral == TIM4_BASE)
+    {
+      return;
+    }
+  else if (timer_peripheral == TIM1_BASE)
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	  TIM1_CCER1 |= TIM_CCER1_CC1E;
+	  break;
+	case TIM_OC1N:
+	  TIM1_CCER1 |= TIM_CCER1_CC1NE;
+	  break;
+	case TIM_OC2:
+	  TIM1_CCER1 |= TIM_CCER1_CC2E;
+	  break;
+	case TIM_OC2N:
+	  TIM1_CCER1 |= TIM_CCER1_CC2NE;
+	  break;
+	case TIM_OC3:
+	  TIM1_CCER2 |= TIM_CCER2_CC3E;
+	  break;
+	case TIM_OC3N:
+	  TIM1_CCER2 |= TIM_CCER2_CC3NE;
+	  break;
+	case TIM_OC4:
+	  TIM1_CCER2 |= TIM_CCER2_CC4E;
+	  break;
+	}
+    }
+  else			/* TIM2,3,5 */
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	  TIM_CCER1(timer_peripheral) |= TIM_CCER1_CC1E;
+	  break;
+	case TIM_OC1N:
+	  TIM_CCER1(timer_peripheral) |= TIM_CCER1_CC1NE;
+	  break;
+	case TIM_OC2:
+	  TIM_CCER1(timer_peripheral) |= TIM_CCER1_CC2E;
+	  break;
+	case TIM_OC2N:
+	  TIM_CCER1(timer_peripheral) |= TIM_CCER1_CC2NE;
+	  break;
+	}
+    }
+}
+
+void
+timer_disable_oc_output (uint16_t timer_peripheral, enum tim_oc_id oc_id)
+{
+  if (timer_peripheral == TIM4_BASE)
+    {
+      return;
+    }
+  else if (timer_peripheral == TIM1_BASE)
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	  TIM1_CCER1 &= ~TIM_CCER1_CC1E;
+	  break;
+	case TIM_OC1N:
+	  TIM1_CCER1 &= ~TIM_CCER1_CC1NE;
+	  break;
+	case TIM_OC2:
+	  TIM1_CCER1 &= ~TIM_CCER1_CC2E;
+	  break;
+	case TIM_OC2N:
+	  TIM1_CCER1 &= ~TIM_CCER1_CC2NE;
+	  break;
+	case TIM_OC3:
+	  TIM1_CCER2 &= ~TIM_CCER2_CC3E;
+	  break;
+	case TIM_OC3N:
+	  TIM1_CCER2 &= ~TIM_CCER2_CC3NE;
+	  break;
+	case TIM_OC4:
+	  TIM1_CCER2 &= ~TIM_CCER2_CC4E;
+	  break;
+	}
+    }
+  else			/* TIM2,3,5 */
+    {
+      switch (oc_id)
+	{
+	case TIM_OC1:
+	  TIM_CCER1(timer_peripheral) &= ~TIM_CCER1_CC1E;
+	  break;
+	case TIM_OC1N:
+	  TIM_CCER1(timer_peripheral) &= ~TIM_CCER1_CC1NE;
+	  break;
+	case TIM_OC2:
+	  TIM_CCER1(timer_peripheral) &= ~TIM_CCER1_CC2E;
+	  break;
+	case TIM_OC2N:
+	  TIM_CCER1(timer_peripheral) &= ~TIM_CCER1_CC2NE;
+	  break;
+	}
+    }
+}
+
+void
+timer_enable_break_main_output (uint16_t timer_peripheral)
+{
+  if (timer_peripheral == TIM4_BASE)
+    {
+      return;
+    }
+  else if (timer_peripheral == TIM1_BASE)
+    {
+      TIM1_BKR |= TIM_BKR_MOE;
+    }
+  else			/* TIM2,3,5 */
+    {
+      TIM_BKR(timer_peripheral) |= TIM_BKR_MOE;
+    }
+}
+
+void
+timer_disable_break_main_output (uint16_t timer_peripheral)
+{
+  if (timer_peripheral == TIM4_BASE)
+    {
+      return;
+    }
+  else if (timer_peripheral == TIM1_BASE)
+    {
+      TIM1_BKR &= ~TIM_BKR_MOE;
+    }
+  else			/* TIM2,3,5 */
+    {
+      TIM_BKR(timer_peripheral) &= ~TIM_BKR_MOE;
+    }
+}
+
+void
+timer_enable_counter (uint16_t timer_peripheral)
+{
+  TIM_CR1(timer_peripheral) |= TIM_CR1_CEN;
+}
+
+void
+timer_disable_counter (uint16_t timer_peripheral)
+{
+  TIM_CR1(timer_peripheral) &= ~TIM_CR1_CEN;
+}

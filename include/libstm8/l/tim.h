@@ -1018,5 +1018,15 @@ void timer_set_oc_mode (uint16_t timer_peripheral, enum tim_oc_id oc_id,
 			enum tim_oc_mode oc_mode);
 void timer_enable_oc_preload (uint32_t timer_peripheral, enum tim_oc_id oc_id);
 void timer_disable_oc_preload (uint32_t timer_peripheral, enum tim_oc_id oc_id);
+void timer_set_oc_value (uint16_t timer_peripheral, enum tim_oc_id oc_id,
+			 uint16_t value);
+void timer_disable_oc_output (uint16_t timer_peripheral, enum tim_oc_id oc_id);
+void timer_enable_oc_output (uint16_t timer_peripheral, enum tim_oc_id oc_id);
+
+void timer_enable_break_main_output (uint16_t timer_peripheral);
+void timer_disable_break_main_output (uint16_t timer_peripheral);
+
+void timer_enable_counter (uint16_t timer_peripheral);
+void timer_disable_counter (uint16_t timer_peripheral);
 
 #endif
