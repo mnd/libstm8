@@ -118,3 +118,27 @@ usart_recv_blocking(uint16_t usart)
   usart_wait_recv_ready (usart);
   return usart_recv (usart);
 }
+
+void
+usart_enable_tx_dma (uint16_t usart)
+{
+  USART_CR5(usart) |= USART_CR5_DMAT;
+}
+
+void
+usart_disable_tx_dma (uint16_t usart)
+{
+  USART_CR5(usart) &= ~USART_CR5_DMAT;
+}
+
+void
+usart_enable_rx_dma (uint16_t usart)
+{
+  USART_CR5(usart) |= USART_CR5_DMAR;
+}
+
+void
+usart_disable_rx_dma (uint16_t usart)
+{
+  USART_CR5(usart) &= ~USART_CR5_DMAR;
+}

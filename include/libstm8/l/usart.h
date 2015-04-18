@@ -35,7 +35,43 @@
 #define USART_CR5(base)  MMIO8(base + 0x8)   /* USART1 control register 5 */
 #define USART_GTR(base)  MMIO8(base + 0x9)   /* USART1 guard time register */
 #define USART_PSCR(base) MMIO8(base + 0xA)   /* USART1 prescaler register */
+
+#define USART1_SR USART_SR(USART1)
+#define USART1_DR USART_DR(USART1)
+#define USART1_BRR1 USART_BRR1(USART1)
+#define USART1_BRR2 USART_BRR2(USART1)
+#define USART1_CR1 USART_CR1(USART1)
+#define USART1_CR2 USART_CR2(USART1)
+#define USART1_CR3 USART_CR3(USART1)
+#define USART1_CR4 USART_CR4(USART1)
+#define USART1_CR5 USART_CR5(USART1)
+#define USART1_GTR USART_GTR(USART1)
+#define USART1_PSCR USART_PSCR(USART1)
 
+#define USART2_SR USART_SR(USART2)
+#define USART2_DR USART_DR(USART2)
+#define USART2_BRR1 USART_BRR1(USART2)
+#define USART2_BRR2 USART_BRR2(USART2)
+#define USART2_CR1 USART_CR1(USART2)
+#define USART2_CR2 USART_CR2(USART2)
+#define USART2_CR3 USART_CR3(USART2)
+#define USART2_CR4 USART_CR4(USART2)
+#define USART2_CR5 USART_CR5(USART2)
+#define USART2_GTR USART_GTR(USART2)
+#define USART2_PSCR USART_PSCR(USART2)
+
+#define USART3_SR USART_SR(USART3)
+#define USART3_DR USART_DR(USART3)
+#define USART3_BRR1 USART_BRR1(USART3)
+#define USART3_BRR2 USART_BRR2(USART3)
+#define USART3_CR1 USART_CR1(USART3)
+#define USART3_CR2 USART_CR2(USART3)
+#define USART3_CR3 USART_CR3(USART3)
+#define USART3_CR4 USART_CR4(USART3)
+#define USART3_CR5 USART_CR5(USART3)
+#define USART3_GTR USART_GTR(USART3)
+#define USART3_PSCR USART_PSCR(USART3)
+
 /* Status register */
 #define USART_SR_TXE  (1 << 7) /* is USART1_DR transferred to the shift register */
 #define USART_SR_TC   (1 << 6) /* transmission complite */
@@ -148,4 +184,9 @@ void usart_send_blocking (uint16_t usart, uint8_t byte);
 void usart_wait_recv_ready (uint16_t usart);
 uint8_t usart_recv (uint16_t usart);
 uint8_t usart_recv_blocking (uint16_t usart);
+
+void usart_enable_tx_dma (uint16_t usart);
+void usart_enable_rx_dma (uint16_t usart);
+void usart_disable_tx_dma (uint16_t usart);
+void usart_disable_rx_dma (uint16_t usart);
 #endif
