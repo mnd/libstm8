@@ -43,27 +43,27 @@
 #define DMA1_C0M0ARH DMA1_CxM0ARH(0) /* DMA1 memory 0 address high register */
 #define DMA1_C0M0ARL DMA1_CxM0ARL(0) /* DMA1 memory 0 address low register */
 
-#define DMA1_C1CR    DMA1_CxCR(1)   
-#define DMA1_C1SPR   DMA1_CxSPR(1)  
-#define DMA1_C1NDTR  DMA1_CxNDTR(1) 
-#define DMA1_C1PARH  DMA1_CxPARH(1) 
-#define DMA1_C1PARL  DMA1_CxPARL(1) 
+#define DMA1_C1CR    DMA1_CxCR(1)
+#define DMA1_C1SPR   DMA1_CxSPR(1)
+#define DMA1_C1NDTR  DMA1_CxNDTR(1)
+#define DMA1_C1PARH  DMA1_CxPARH(1)
+#define DMA1_C1PARL  DMA1_CxPARL(1)
 #define DMA1_C1M0ARH DMA1_CxM0ARH(1)
 #define DMA1_C1M0ARL DMA1_CxM0ARL(1)
 
-#define DMA1_C2CR    DMA1_CxCR(2)   
-#define DMA1_C2SPR   DMA1_CxSPR(2)  
-#define DMA1_C2NDTR  DMA1_CxNDTR(2) 
-#define DMA1_C2PARH  DMA1_CxPARH(2) 
-#define DMA1_C2PARL  DMA1_CxPARL(2) 
+#define DMA1_C2CR    DMA1_CxCR(2)
+#define DMA1_C2SPR   DMA1_CxSPR(2)
+#define DMA1_C2NDTR  DMA1_CxNDTR(2)
+#define DMA1_C2PARH  DMA1_CxPARH(2)
+#define DMA1_C2PARL  DMA1_CxPARL(2)
 #define DMA1_C2M0ARH DMA1_CxM0ARH(2)
 #define DMA1_C2M0ARL DMA1_CxM0ARL(2)
 
-#define DMA1_C3CR    DMA1_CxCR(3)   
-#define DMA1_C3SPR   DMA1_CxSPR(3)  
-#define DMA1_C3NDTR  DMA1_CxNDTR(3) 
-#define DMA1_C3PARH_C3M1ARH DMA1_CxPARH(3) 
-#define DMA1_C3PARL_C3M1ARL DMA1_CxPARL(3) 
+#define DMA1_C3CR    DMA1_CxCR(3)
+#define DMA1_C3SPR   DMA1_CxSPR(3)
+#define DMA1_C3NDTR  DMA1_CxNDTR(3)
+#define DMA1_C3PARH_C3M1ARH DMA1_CxPARH(3)
+#define DMA1_C3PARL_C3M1ARL DMA1_CxPARL(3)
 #define DMA1_C3M0ARH DMA1_CxM0ARH(3)
 #define DMA1_C3M0ARL DMA1_CxM0ARL(3)
 #define DMA1_C3M0EAR DMA1_CxM0EAR(3) /* only on medium+ and high density devices */
@@ -101,7 +101,7 @@
 #define DMA1_CxSPR_PL_HIGH	0x2
 #define DMA1_CxSPR_PL_VERY_HIGH	0x3 /* DMA takes precedence over the CPU */
 
-/* DMA1_CxNDTR(n) -- number of data (byte/word) to transfer. Can be read to get 
+/* DMA1_CxNDTR(n) -- number of data (byte/word) to transfer. Can be read to get
  progress.
 */
 
@@ -110,7 +110,7 @@
 
 /* DMA1_C3PARH_C3M1ARH:DMA1_C3PARL_C3M1ARL
    when DMA1_CxCR_MEM disabled -- same as DMA1_CxPARH(n):DMA1_CxPARL(n)
-   when DMA1_CxCR_MEM enabled -- destination memory adress at most 0x1F:0xFF in 
+   when DMA1_CxCR_MEM enabled -- destination memory adress at most 0x1F:0xFF in
    mem-to-mem transfer.
 */
 #define DMA1_C3PARH_C3M1ARH_MASK 0x1F
@@ -122,4 +122,62 @@
 
 #define DMA1_C3M0EAR_MASK 0x1 	/* additional bit for memory address */
 
+/* DMA1 channel request mapping
+   | IPs    | Channel 0 | Channel 1   | Channel 2 | Channel 3   |
+   |--------+-----------+-------------+-----------+-------------|
+   | ADC1   | EOC       | EOC         | EOC       | EOC         |
+   | SPI1   |           | SPI1_RX     | SPI1_TX   |             |
+   | AES    | AES_IN    |             |           | AES_OUT     |
+   | I2C    | I2C_RX    |             |           | I2C_TX      |
+   | USART1 |           | USART1_TX   | USART1_RX |             |
+   | DAC    |           | DAC_CH2TRIG |           | DAC_CH1TRIG |
+   | TIM2   | TIM2_CC1  | TIM2_U      |           | TIM2_CC2    |
+   | TIM3   | TIM3_U    | TIM3_CC1    | TIM3_CC2  |             |
+   | TIM1   | TIM1_CC3  | TIM1_CC4    | TIM1_U    | TIM1_CC2    |
+   |        |           |             | TIM1_CC1  |             |
+   |        |           |             | TIM1_COM  |             |
+   | USART2 | USART2_TX |             |           | USART2_RX   |
+   | USART3 |           | USART3_TX   | USART3_RX |             |
+   | SPI2   | SPI2_RX   |             |           | SPI2_TX     |
+   | TIM5   | TIM5_U    |             | TIM5_CC1  | TIM5_CC2    |
+   | TIM4   | TIM4_U    | TIM4_U      | TIM4_U    | TIM4_U      |
+
+   ADC1 and TIM4 can be mapped to any channel according to SYSCFG_RMPCR1
+*/
+
+enum dma_channel {
+  DMA_CHANNEL0 = 0,
+  DMA_CHANNEL1 = 1,
+  DMA_CHANNEL2 = 2,
+  DMA_CHANNEL3 = 3
+};
+
+enum dma_size {
+  DMA_TSIZE_8BIT = 0,
+  DMA_TSIZE_16BIT = 1
+};
+
+void dma_channel_reset (uint16_t dma, enum dma_channel channel);
+void dma_set_peripheral_address (uint16_t dma, enum dma_channel channel,
+				 uint16_t peripheral_adress);
+void dma_set_number_of_data (uint16_t dma, enum dma_channel channel,
+			     uint8_t number);
+void dma_set_memory_address (uint16_t dma, enum dma_channel channel,
+			     uint16_t data);
+void dma_set_read_from_memory (uint16_t dma, enum dma_channel channel);
+void dma_enable_memory_increment_mode (uint16_t dma, enum dma_channel channel);
+void dma_clear_interrupt_flags (uint16_t dma, enum dma_channel channel,
+				uint8_t interrupts);
+void dma_enable_transfer_complete_interrupt (uint16_t dma,
+					     enum dma_channel channel);
+void dma_disable_transfer_complete_interrupt (uint16_t dma,
+					     enum dma_channel channel);
+void dma_enable_half_transfer_interrupt (uint16_t dma, enum dma_channel channel);
+void dma_disable_half_transfer_interrupt (uint16_t dma, enum dma_channel channel);
+void dma_set_size (uint16_t dma, enum dma_channel channel, enum dma_size size);
+void dma_set_priority (uint16_t dma, enum dma_channel, uint8_t priority);
+void dma_enable_channel (uint16_t dma, enum dma_channel channel);
+void dma_disable_channel (uint16_t dma, enum dma_channel channel);
+void dma_enable (uint16_t dma);
+void dma_disable (uint16_t dmax);
 #endif
